@@ -38,24 +38,24 @@ Comme vous pouvez le voir, un commit est défini par:
   personne peut utilisé le patch pour créer le commit.
 - Un **comment** qui décrit ce commit.
 
-Note that a commit does not itself contain any information about what
-actually changed; all changes are calculated by comparing the contents
-of the tree referred to by this commit with the trees associated with
-its parents.  In particular, git does not attempt to record file renames
-explicitly, though it can identify cases where the existence of the same
-file data at changing paths suggests a rename.  (See, for example, the
--M option to linkgit:git-diff[1]).
+Notez qu'un commit ne contient pas d'infor,mation à propos de ce qui a été
+modifié; tous les changements sont calculés en comparant les contenus du
+"tree" référencé dans ce commit avec le "tree" associé au(x) parent(s) du
+commit. En particulier, git n'essaye pas d'enregistrer le rennomage de fichier
+explicitement, bien qu'il puisse identifier des cas où la persistance
+des données d'un fichier avec un chemin modifié suggère un rennomage. (Voir,
+par exemple, la commande linkgit:git-diff[1] avec l'option -M).
 
-A commit is usually created by linkgit:git-commit[1], which creates a
-commit whose parent is normally the current HEAD, and whose tree is
-taken from the content currently stored in the index.
+Un commit est normalement créé avec la commande linkgit:git-commit[1], qui
+crée un commit dont le parent est est le HEAD courant, et avec le "tree" pris
+depuis le contenu actuellement stocké dans l'index.
 
-### The Object Model ###
+### Le Modèle Objet ###
 
-So, now that we've looked at the 3 main object types (blob, tree and commit), 
-let's take a quick look at how they all fit together.
+Donc, maintenant que nous avons vu les 3 types d'objets principaux (blob, tree
+et commit), regardons rapidement comment ils travaillent ensemble.
 
-If we had a simple project with the following directory structure:
+Si nous avons un simple projet avec la structure de dossiers suivante:
 
     $>tree
     .
@@ -67,10 +67,11 @@ If we had a simple project with the following directory structure:
 
     2 directories, 3 files
 
-And we committed this to a Git repository, it would be represented like this:
+Et si nous committons ce projet sur un dépôt Git, il sera représenté comme ça:
 
 [fig:objects-example]
 
-You can see that we have created a **tree** object for each directory (including the root)
-and a **blob** object for each file.  Then we have a **commit** object to point
-to the root, so we can track what our project looked like when it was committed.
+Vous pouvez voir que nous avons créé un objet **tree** pour chaque répertoire (pour la
+racine aussi) et un objet **blob** pour chaque fichier. Ensuite nous avons un objet
+**commit** qui pointe vers la racine, afin que nous puissions récupérer l'apparence
+du projet quand il a été committé.
