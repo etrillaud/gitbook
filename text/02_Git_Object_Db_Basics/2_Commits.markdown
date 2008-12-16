@@ -1,13 +1,12 @@
-### Commit Object ###
+### L'Objet Commit ###
 
-The "commit" object links a physical state of a tree with a description
-of how we got there and why. 
+L'objet "commit" lie l'état physique d'un "tree" avec une description
+de la manière et de la raison de l'arrivée à cet état.
 
 [fig:object-commit]
 
-You can use the --pretty=raw option to
-linkgit:git-show[1] or linkgit:git-log[1] to examine your favorite
-commit:
+Vous pouvez utiliser linkgit:git-show[1] ou linkgit:git-log[1] avec
+l'option  --pretty=raw pour examiner vos commits favoris:
 
     $ git show -s --pretty=raw 2be7fcb476
     commit 2be7fcb4764f2dbcee52635b91fedb1b3dcf7ab4
@@ -20,24 +19,24 @@ commit:
 
         Signed-off-by: Junio C Hamano <gitster@pobox.com>
 
-As you can see, a commit is defined by:
+Comme vous pouvez le voir, un commit est défini par:
 
-- a **tree**: The SHA1 name of a tree object (as defined below), representing
-  the contents of a directory at a certain point in time.
-- **parent(s)**: The SHA1 name of some number of commits which represent the
-  immediately previous step(s) in the history of the project.  The
-  example above has one parent; merge commits may have more than
-  one.  A commit with no parents is called a "root" commit, and
-  represents the initial revision of a project.  Each project must have
-  at least one root.  A project can also have multiple roots, though
-  that isn't common (or necessarily a good idea).
-- an **author**: The name of the person responsible for this change, together
-  with its date.
-- a **committer**: The name of the person who actually created the commit,
-  with the date it was done.  This may be different from the author; for
-  example, if the author wrote a patch and emailed it to another person who
-  used the patch to create the commit.
-- a **comment** describing this commit.
+- Un **tree**: Le nom SHA1 de l'objet "tree" (comme défini précédemment),
+  représentant le contenu d'un répertoire à un certain moment.
+- **parent(s)**: Le nom SHA1 de (ou des) numéro de commits qui représente
+  l'étape antérieure dans l'historique du projet. L'exemple ci-dessus a un
+  parent; les commits mergés peuvent en avoir plus d'un. Un commit sans parent
+  est nommé le commit "racine", et représente la révision initiale d'un projet.
+  Chaque projet doit contenir au moins une racine. Un projet peut avoir
+  plusieurs racine, bien que ça ne soit pas très commun (ou que ça ne soit pas
+  une bonne idée).
+- Un **author**: Le nom de la personne responsable de ce changement,
+  avec sa date
+- Un **committer**: Le nom de la personne qui a créé le commit, avec la date
+  de création. Cet attribut peut être différent de l'auteur; par exemple, si
+  l'auteur écrit un patch est l'envoit à une autre personne par email, cet
+  personne peut utilisé le patch pour créer le commit.
+- Un **comment** qui décrit ce commit.
 
 Note that a commit does not itself contain any information about what
 actually changed; all changes are calculated by comparing the contents
