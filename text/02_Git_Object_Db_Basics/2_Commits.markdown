@@ -34,11 +34,11 @@ Comme vous pouvez le voir, un commit est défini par:
   avec sa date
 - Un **committer**: Le nom de la personne qui a créé le commit, avec la date
   de création. Cet attribut peut être différent de l'auteur; par exemple, si
-  l'auteur écrit un patch est l'envoit à une autre personne par email, cet
+  l'auteur écrit un patch est l'envoi à une autre personne par mail, cet
   personne peut utilisé le patch pour créer le commit.
 - Un **comment** qui décrit ce commit.
 
-Notez qu'un commit ne contient pas d'infor,mation à propos de ce qui a été
+Notez qu'un commit ne contient pas d'information à propos de ce qui a été
 modifié; tous les changements sont calculés en comparant les contenus du
 "tree" référencé dans ce commit avec le "tree" associé au(x) parent(s) du
 commit. En particulier, git n'essaye pas d'enregistrer le rennomage de fichier
