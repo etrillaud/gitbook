@@ -1,3 +1,3 @@
-## Installing Git ##
+## Installer Git ##
 
 
