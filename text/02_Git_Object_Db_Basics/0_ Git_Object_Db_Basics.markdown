@@ -1,55 +1,59 @@
-## The Git Object Model ##
+## Le Modèle Objet Git ##
 
-### The SHA ###
+### SHA ###
 
-All the information needed to represent the history of a
-project is stored in files referenced by a 40-digit "object name" that 
-looks something like this:
+Toutes les informations nécessaires pour décrire l'historique d'un
+projet sont stockées dans des fichiers référencés par un "nom d'objet"
+de 40 caractères qui ressemble à quelque chose comme ça:
     
     6ff87c4664981e4397625791c8ea3bbb5f2279a3
-    
-You will see these 40-character strings all over the place in Git.
-In each case the name is calculated by taking the SHA1 hash of the
-contents of the object.  The SHA1 hash is a cryptographic hash function.
-What that means to us is that it is virtually impossible to find two different
-objects with the same name.  This has a number of advantages; among
-others:
 
-- Git can quickly determine whether two objects are identical or not,
-  just by comparing names.
-- Since object names are computed the same way in every repository, the
-  same content stored in two repositories will always be stored under
-  the same name.
-- Git can detect errors when it reads an object, by checking that the
-  object's name is still the SHA1 hash of its contents.
+Partout dans Git, vous trouverez ces chaînes de 40 caractères.
+Dans chaque situation, le nom est calculé en prenant le hash SHA1
+représentant le contenu de l'objet. Le hash SAH1 est une fonction de
+hash cryptographique. Ce que cela signifie pour nous, c'est qu'il est
+virtuellement impossible de trouver 2 objets différents avec le même nom.
+Cela à de nombreux avantages, parmi lesquels:
 
-### The Objects ###
+- Git peut rapidement savoir si 2 objets sont les mêmes ou non, juste
+  en comparant les noms.
+- Puisque le nom des objets sont calculés de la même façon dans chaque
+  dépôt, le même contenu stocké dans des dépôts différent sera toujours
+  stocké avec le même nom.
+- Git peut détecter les erreurs quand il lit un objet, en vérifiant que
+  le nom de l'objet est toujours le hash SHA1 de son contenu
 
-Every object consists of three things - a **type**, a **size** and **content**.
-The _size_ is simply the size of the contents, the contents depend on what
-type of object it is, and there are four different types of objects: 
-"blob", "tree", "commit", and "tag".
+### Les Objets ###
 
-- A **"blob"** is used to store file data - it is generally a file.
-- A **"tree"** is basically like a directory - it references a bunch of
-    other trees and/or blobs (i.e. files and sub-directories)
-- A **"commit"** points to a single tree, marking it as what the project
-    looked like at a certain point in time.  It contains meta-information
-    about that point in time, such as a timestamp, the author of the changes
-    since the last commit, a pointer to the previous commit(s), etc.
-- A **"tag"** is a way to mark a specific commit as special in some way.  It
-    is normally used to tag certain commits as specific releases or something
-    along those lines.
+Chaque objet se compose de 3 choses - un **type**, une **taille** et le
+**contenu**. La _taille_ est simplement la taille du contenu, le contenu
+dépend du type de l'objet, et il y a 4 types d'objets différents:
+"blob", "tree", "commit", et "tag".
 
-Almost all of Git is built around manipulating this simple structure of four
-different object types.  It is sort of its own little filesystem that sits
-on top of your machine's filesystem.
+- Un **"blog"** est utilisé pour stocker les données d'un fichier - il
+  s'agit en général d'un fichier.
+- Un **"tree"** est comme un répertoire - il référence une liste d'autres
+  "tree" et/ou d'autres "blobs" (i.e. fichiers et sous-répertoires).
+- Un **"commit"** pointe vers un unique "tree", et le marquant afin de 
+  représenter le projet à un certain point dans le temps. Il contient des
+  méta-informations à propos de ce point dans le temps, comme le timestamp,
+  l'auteur du contenu depuis le dernier commit, un pointeur vers le (ou les)
+  dernier(s) commit(s), etc.
+- Un **"tag"** est une manière de représenter un commit spécifique un peu
+  spécial. Il est normalement utilisé pour tagger certains commits en tant
+  que version spécifique ou quelque chose comme ça.
 
-### Different from SVN ###
+La quasi-totalité de Git est construit autour de la manipulation de cette simple
+structure de 4 types d'objets différents. C'est comme un mini-système de 
+fichier qui se situe au-dessus du système de fichier de votre ordinateur.
 
-It is important to note that this is very different from most SCM systems
-that you may be familiar with.  Subversion, CVS, Perforce, Mercurial and the
-like all use _Delta Storage_ systems - they store the differences between one
-commit and the next.  Git does not do this - it stores a snapshot of what all
-the files in your project look like in this tree structure each time you
-commit. This is a very important concept to understand when using Git.
+### Différences avec SVN ###
+
+Il est important de noter que ce système est très différent des autres
+outils de contrôle de version (SCM) dont vous êtes familier. Subversion, CVS, 
+Perforce, Mercurial et les autres utilisent tous un système de 
+_stockage de Delta_ - ils stockent les différences entre un commit et le
+suivant. Git ne fait pas ça - il stocke une vue instantanée de la 
+représentation de tous les fichiers de votre projet dans une structure
+hiérarchisée chaque fois que vous faites un commit. C'est un concept très 
+important pour comprendre comment utiliser Git.
