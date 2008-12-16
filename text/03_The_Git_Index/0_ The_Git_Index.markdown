@@ -1,9 +1,10 @@
-## The Git Index ##
+## L'Index Git ##
 
-The Git index is used as a staging area between your working directory 
-and your repository.  You can use the index to build up a set of changes
-that you want to commit together.  When you create a commit, what is committed
-is what is currently in the index, not what is in your working directory.
+L'index Git est une zone d'assemblage entre votre répertoire de travail
+et votre dépôt. Vous pouvez utiliser l'index pour contruire un groupe de
+changements qui seront committé ensemble. Quand vous créez un commit, ce
+qui se trouve dans l'index est ce qui est committé, et pas ce qui se trouve
+dans le répertoire de travail.
 
 ### Looking at the Index ###
 
