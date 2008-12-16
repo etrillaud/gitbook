@@ -1,21 +1,23 @@
-### Git Config ###
+### Configuration de Git ###
 
-The first thing you're going to want to do is set up your name and email
-address for Git to use to sign your commits.
+La première chose que vous voudrez et devrez faire, c'est de configurer
+votre nom et votre adresse mail que Git utilisera quand vous signerez
+vos commits.
 
     $ git config --global user.name "Scott Chacon"
     $ git config --global user.email "schacon@gmail.com"
 
-That will set up a file in your home directory which may be used by any of
-your projects. By default that file is *~/.gitconfig* and the contents will
-look like this:
+Ces commandes vont créer un fichier dans votre répertoire utilisateur qui 
+sera utilisé par tout vos projets. Par défaut, ce fichier est
+*~/.gitconfig* et il contiendra quelque chose comme ça:
 
     [user]
             name = Scott Chacon
             email = schacon@gmail.com
             
-If you want to override those values for a specific project (to use a work
-email address, for example), you can run the *git config* command without the
-*--global* option while in that project. This will add a [user] section like
-the one shown above to the *.git/config* file in your project's root
-directory.
+Si vous voulez changez ces valeurs pour un projet spécifique (pour utiliser
+un mail d'entreprise par exemple), vous pouvez lancer la commande
+*git config*, sans l'option *--global*, quand vous êtes à l'intérieur de
+votre projet. Cela ajoutera une section [user], comme celle que nous venons
+de voir, dans le fichier *.git/config* qui se trouve à la racine de votre
+projet.

@@ -1,2 +1,2 @@
-## Setup and Initialization ##
+## Configuration et Initialisation ##
 
