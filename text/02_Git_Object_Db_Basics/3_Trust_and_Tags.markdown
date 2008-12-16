@@ -1,12 +1,12 @@
 
-### Tag Object ###
+### L'Objet Tag ###
 
 [fig:object-tag]
 
-A tag object contains an object name (called simply 'object'), object type,
-tag name, the name of the person ("tagger") who created the tag, and a
-message, which may contain a signature, as can be seen using
-linkgit:git-cat-file[1]:
+Un objet "tag" contient un nom d'objet (simplement nommé 'object'), un type
+d'objet, un nom de tag, le nom de la personne ("taggeur") qui a créé le tag,
+et un message, qui peut contenir une signature, comme on peut le voir en
+utilisant linkgit:git-cat-file[1]:
 
     $ git cat-file tag v1.5.0
     object 437b1b20df4b356c9342dac8d38849f24ef44f27
@@ -23,7 +23,8 @@ linkgit:git-cat-file[1]:
     =2E+0
     -----END PGP SIGNATURE-----
 
-See the linkgit:git-tag[1] command to learn how to create and verify tag
-objects.  (Note that linkgit:git-tag[1] can also be used to create
-"lightweight tags", which are not tag objects at all, but just simple
-references whose names begin with "refs/tags/").
+Voyez la commande linkgit:git-tag[1] pour apprendre comment créer et
+vérifier les objets "tags". (Notez que linkgit:git-tag[1] peut aussi être
+utilisé pour créer des "tags légers", qui ne sont pas du tout des objets
+"tags", mais juste des simples références dont le nom commence par
+"refs/tags/").
