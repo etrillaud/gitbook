@@ -1,51 +1,52 @@
-## Getting a Git Repository ##
+## Obtenir un Dépôt Git ##
 
-So now that we're all set up, we need a Git repository. We can do this one of
-two ways - we can *clone* one that already exists, or we can *initialize* one
-either from existing files that aren't in source control yet, or from an empty
-directory.
+Maintenant que nous avons tout configuré, nous avons besoin d'un dépôt Git.
+Nous pouvons faire ça de 2 manière - soit *clonant* un dépôt qui
+existe déjà, soit en *initialisant*  un dépôt depuis un dossier vide ou 
+depuis des fichiers existant qui ne sont pas encore sous contrôle de version.
 
-### Cloning a Repository ###
+### Cloner un Dépôt ###
 
-In order to get a copy of a project, you will need to know the project's Git
-URL - the location of the repository. Git can operate over many different
-protocols, so it may begin with ssh://, http(s)://, git://, or just a username
-(in which case git will assume ssh). Some repositories may be accessed over
-more than one protocol. For example, the source code to Git itself can be
-cloned either over the git:// protocol:
+Afin d'obtenir une copie d'un projet, vous aurez besoin de connaître l'adresse
+URL Git du projet - l'endroit où se trouve le dépôt. Git peut être utilisé
+avec de nombreux protocoles, donc cette adresse peut commencer avec ssh://,
+http(s)://, git://, ou juste un nom d'utilisateur (en supposant que git passe
+par ssh). Par exemple, le code source de Git même peut être cloné en passant
+par le protocole git:
 
     git clone git://git.kernel.org/pub/scm/git/git.git
 
-or over http:
+ou par http:
 
     git clone http://www.kernel.org/pub/scm/git/git.git
 
-The git:// protocol is faster and more efficient, but sometimes it is
-necessary to use http when behind corporate firewalls or what have you. In
-either case you should then have a new directory named 'git' that contains all
-the Git source code and history - it is basically a complete copy of what was
-on the server.
+Le protocole git:// est plus rapide et plus efficace, mais il est parfois
+nécessaire d'utiliser http derrière un firewall d'entreprise par exemple.
+Dans tous les cas, vous devriez maintenant avoir un répertoire nommé 'git'
+qui contient tout le code source de Git et son historique - c'est
+simplement une copie de ce qui se trouvait sur le serveur.
 
-By default, Git will name the new directory it has checked out your cloned
-code into after whatever comes directly before the '.git' in the path of the
-cloned project. (ie. *git clone
-http://git.kernel.org/linux/kernel/git/torvalds/linux-2.6.git* will result in
-a new directory named 'linux-2.6')
+Par défaut, Git nommera le nouveau répertoire, où il stockera votre code
+cloné, en prenant ce qui arrive juste avant le '.git' dans le chemin
+du projet cloné. (ie. *git clone
+http://git.kernel.org/linux/kernel/git/torvalds/linux-2.6.git* créera un
+nouveau répertoire nommé 'linux-2.6' pour y cloner le code).
 
-### Initializing a New Repository ###
+### Initialiser un Nouveau Dépôt ###
 
-Assume you have a tarball named project.tar.gz with your initial work. You can
-place it under git revision control as follows.
+Imaginons que nous avons une archive nommée project.tar.gz avec notre
+travail initial. Nous pouvons le placé sous le contrôle de version de Git
+comme ceci:
 
     $ tar xzf project.tar.gz
     $ cd project
     $ git init
 
-Git will reply
+Git vous répondra:
 
     Initialized empty Git repository in .git/
 
-You've now initialized the working directory--you may notice a new
-directory created, named ".git".
+Vus avez maintenant initialisé le répertoire de travail--vous pourrez
+y trouver un nouveau répertoire à l'intérieur, nommé ".git".
 
 [gitcast:c1_init](GitCast #1 - setup, init and cloning)
