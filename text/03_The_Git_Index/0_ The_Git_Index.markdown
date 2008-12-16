@@ -9,7 +9,7 @@ dans le répertoire de travail.
 ### A l'Intérieur de l'Index ###
 
 La façon la plus simple de voir ce qu'est l'index est d'utiliser la commande
-linkgit:git-status[1]. Qand vous lancez git status, vous pouvez voir quels
+linkgit:git-status[1]. Quand vous lancez git status, vous pouvez voir quels
 fichiers sont assemblés (actuellement dans l'index), quels sont ceux
 modifiés mais pas assemblés, et ceux qui ne sont pas suivis.
 
