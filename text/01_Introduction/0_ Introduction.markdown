@@ -22,7 +22,7 @@ commandes de base.
 
 Une fois que vous aurez maîtrisé tout ça, nous nous lancerons dans le 
 **Git avancé** - les commandes que la plupart des gens n'utilisent pas très
-souvent, mais qui peuvent Être très utiles dans certaines situations. Apprendre
+souvent, mais qui peuvent être très utiles dans certaines situations. Apprendre
 ces commandes devrait arrondir votre apprentissage de Git au jour-le-jour; vous
 deviendrez un maître Git!
 
