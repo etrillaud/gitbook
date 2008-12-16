@@ -1,15 +1,17 @@
-## Git Directory and Working Directory ##
+## Le Répertoire Git et le Répertoire de Travail ##
 
-### The Git Directory ###
+### Le Répertoire Git ###
 
-The 'git directory' is the directory that stores all Git's history and meta
-information for your project - including all of the objects (commits, trees,
-blobs, tags), all of the pointers to where different branches are and more.
+Le 'répertoire git' est un répertoire qui contient tout l'historique de Git
+et les méta information du projet - avec tous les objets (commits, tree,
+blobs, tags), tous les pointeurs vers les différentes branches et plus
+encore.
 
-There is only one Git Directory per project (as opposed to one per
-subdirectory like with SVN or CVS), and that directory is (by default, though
-not necessarily) '.git' in the root of your project.  If you look at the
-contents of that directory, you can see all of your important files:
+Il y a un seul répertoire Git par projet (au contraire de sytèeme comme SVN
+ou CVS qui contient ce répertoire dans chaque sous-répertoire du projet),
+ce dossier se nomme '.git' (par défaut, il peut être nommé differement), et
+ce dossier se situe à la racine de votre projet. Si vous regardez le contenu
+de ce répertoire, vous pouvez y trouver tous vos fichiers important:
 
     $>tree -L 1
     .
@@ -22,13 +24,14 @@ contents of that directory, you can see all of your important files:
     |-- objects/     # your objects (commits, trees, blobs, tags)
     `-- refs/        # pointers to your branches
 
-(there may be some other files/directories in there as well, but they are not important for now)
+(Vous pourrez trouver d'autres fichiers/dossiers ici aussi, mais ils ne sont pas important pour
+l'instant)
 
-### The Working Directory ###
+### Le Répertoire de Travail ###
 
-The Git 'working directory' is the directory that holds the current checkout 
-of the files you are working on.  Files in this directory are often removed
-or replaced by Git as you switch branches - this is normal.  All your history 
-is stored in the Git Directory; the working directory is simply a temporary 
-checkout place where you can modify the files until your next commit.
-
+Le 'répertoire de travail' de Git est le répertoire qui contient la version
+courante des fichiers sur lesquels vous travaillez. Les fichiers de ce répertoire
+sont souvent effacés ou remplacés par Git quand vous chagez de branche - c'est
+tout à fait normal. Tout votre historiaue est stocké dans votre répertoire Git;
+le répertoire de travail est simplement une version temporaire de votre projet où
+vous modifier les fichiers jusqu'à votre prochain commit.
