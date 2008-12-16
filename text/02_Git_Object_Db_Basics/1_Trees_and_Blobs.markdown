@@ -1,11 +1,12 @@
-### Blob Object ###
+### L'Objet Blob ###
 
-A blob generally stores the contents of a file.
+Un "blob" stocke généralement le contenu d'un fichier.
 
 [fig:object-blob]
 
-You can use linkgit:git-show[1] to examine the contents of any blob. 
-Assuming we have the SHA for a blob, we can examine its contents like this:
+Vous pouvez utiliser linkgit:git-show[1] pour examiner le contenu de
+n'importe quel blob. Si nous avons le SHA1 d'un blob, nous pouvons l'examiner
+comme ceci:
 
     $ git show 6ff87c4664
 
@@ -14,25 +15,27 @@ Assuming we have the SHA for a blob, we can examine its contents like this:
      v2.2 or v3.x or whatever), unless explicitly otherwise stated.
     ...
 
-A "blob" object is nothing but a chunk of binary data.  It doesn't refer
-to anything else or have attributes of any kind, not even a file name.
+Un "blog" n'est rien de plus qu'un morceau de données binaires. Il ne fait
+référence à rien, et n'a aucun attribut, même pas un nom de fichier.
 
-Since the blob is entirely defined by its data, if two files in a
-directory tree (or in multiple different versions of the repository)
-have the same contents, they will share the same blob object. The object
-is totally independent of its location in the directory tree, and
-renaming a file does not change the object that file is associated with.
+Puisque le blob est entièrement défini par ses données, si 2 fichiers dans
+un répertoire (ou dans différentes versions du dépôt) ont le même contenu,
+ils partageront alors le même objet blob. Cet objet est totalement
+indépendant de l'endroit où il se trouve dans la hiérarchie des dossiers,
+et renommer un fichier ne change pas l'objet auquel ce fichier est
+associé.
 
-### Tree Object ###
+### L'Objet Tree ###
 
-A tree is a simple object that has a bunch of pointers to blobs and other
-trees - it generally represents the contents of a directory or subdirectory.
+Un "tree" est un simple objet qui contient une liste de pointeurs vers des
+"blobs" et d'autres "trees" - il représente généralement le contenu d'un
+répertoire ou sous-répertoire.
 
 [fig:object-tree]
 
-The ever-versatile linkgit:git-show[1] command can also be used to
-examine tree objects, but linkgit:git-ls-tree[1] will give you more
-details.  Assuming we have the SHA for a tree, we can examine it like this:
+La commande polyvalente linkgit:git-show[1] peut aussi Être utilisée pour
+examiner un objet "tree", mais linkgit:git-ls-tree[1] vous donnera plus de
+détails. Si nous avons le SHA1 d'un tree, nous pouvons le détailler comme ceci:
 
     $ git ls-tree fb3a8bdd0ce
     100644 blob 63c918c667fa005ff12ad89437f2fdc80926e21c    .gitignore
@@ -45,21 +48,21 @@ details.  Assuming we have the SHA for a tree, we can examine it like this:
     100644 blob 548142c327a6790ff8821d67c2ee1eff7a656b52    README
     ...
 
-As you can see, a tree object contains a list of entries, each with a
-mode, object type, SHA1 name, and name, sorted by name.  It represents
-the contents of a single directory tree.
+Comme vous pouvez le voir, un objet tree contient une liste d'entrées,
+chacune avec un mode, un type d'objet, un nom SHA1, un nom, le tout trié
+avec le nom. L'objet tree représente le contenu d'un unique dossier.
 
-An object referenced by a tree may be blob, representing the contents of a
-file, or another tree, representing the contents of a subdirectory.  Since
-trees and blobs, like all other objects, are named by the SHA1 hash of their
-contents, two trees have the same SHA1 name if and only if their contents
-(including, recursively, the contents of all subdirectories) are identical.
-This allows git to quickly determine the differences between two related tree
-objects, since it can ignore any entries with identical object names.
+Un objet référencé par un tree peut être un blog, représentant le contenu
+d'un fichier, ou un autre tree, représentant le contenu d'un sous-répertoire.
+Puisque les trees et les blobs, comme les autres objets, sont nommés par le
+hash SHA1 de leur contenu, 2 trees ont le même nom SHA1 si, et seulement si,
+leur contenu (en incluant, récursivement, le contenu de tous les 
+sous-répertoires) est identique. Cela permet à git de déterminer rapidement
+les différences entre 2 objets trees associés, puisqu'il peut ignorer les
+entrées avec le même nom d'objet.
 
-(Note: in the presence of submodules, trees may also have commits as
-entries.  See the **Submodules** section.)
+(Note: en présence de sous-modules, les trees peuvent aussi contenir des
+commits comme entrées. Voir la section **Sous-Modules**.)
 
-Note that the files all have mode 644 or 755: git actually only pays
-attention to the executable bit.
-
+Notez que tous les fichiers ont le mode 644 ou 755: git ne tient compte que
+du bit exécutable.
