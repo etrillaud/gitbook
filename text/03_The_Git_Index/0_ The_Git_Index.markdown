@@ -1,17 +1,17 @@
 ## L'Index Git ##
 
 L'index Git est une zone d'assemblage entre votre répertoire de travail
-et votre dépôt. Vous pouvez utiliser l'index pour contruire un groupe de
+et votre dépôt. Vous pouvez utiliser l'index pour construire un groupe de
 changements qui seront committé ensemble. Quand vous créez un commit, ce
 qui se trouve dans l'index est ce qui est committé, et pas ce qui se trouve
 dans le répertoire de travail.
 
-### Looking at the Index ###
+### A l'Intérieur de l'Index ###
 
-The easiest way to see what is in the index is with the linkgit:git-status[1]
-command.  When you run git status, you can see which files are staged
-(currently in your index), which are modified but not yet staged, and which
-are completely untracked.
+La façon la plus simple de voir ce qu'est l'index est d'utiliser la commande
+linkgit:git-status[1]. Qand vous lancez git status, vous pouvez voir quels
+fichiers sont assemblés (actuellement dans l'index), quels sont ceux
+modifiés mais pas assemblés, et ceux qui ne sont pas suivis.
 
     $>git status
     # On branch master
@@ -35,11 +35,12 @@ are completely untracked.
     #	blametree-init
     #	git-gui/git-citool
 
-If you blow the index away entirely, you generally haven't lost any
-information as long as you have the name of the tree that it described.
+Si vous effacé complètement l'index, vous ne perdrez généralement aucune
+information tant que vous avez le nom du tree qui est décrit.
 
-And with that, you should have a pretty good understanding of the basics of 
-what Git is doing behind the scenes, and why it is a bit different than most
-other SCM systems.  Don't worry if you don't totally understand it all right 
-now; we'll revisit all of these topics in the next sections. Now we're ready 
-to move on to installing, configuring and using Git.  
+Et avec ça, vous devriez avoir un bonne compréhension des bases de ce que
+Git fait en arrière plan, et pourquoi il est différent de la plupart des
+autres systèmes de contrôle de version. Ne vous inquiétez pas si vous
+n'avez pas encore tout compris; nous reviendrons sur tous ces point dans
+les prochaines parties du livre: Maintenant, nous sommes prêts à installer,
+configurer et utiliser Git.
