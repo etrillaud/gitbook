@@ -1,61 +1,61 @@
-## Distributed Workflows ##
+## Workflows Distribués ##
 
-Suppose that Alice has started a new project with a git repository in
-/home/alice/project, and that Bob, who has a home directory on the
-same machine, wants to contribute.
+Supposons qu'Alice a démarré un nouveau projet dans son dépôt git
+situé dans /home/alice/project, et que Bob, qui a un répertoire
+utilisateur sur la même machine (/home/bob/), veuille y
+contribuer.
 
-Bob begins with:
+Bob commence par:
 
-    $ git clone /home/alice/project myrepo
+    $ git clone /home/alice/project mondepot
 
-This creates a new directory "myrepo" containing a clone of Alice's
-repository.  The clone is on an equal footing with the original
-project, possessing its own copy of the original project's history.
+Cela crée un répertoire "mondepot" qui contient un clone du dépôt
+d'Alice. Le clone est une copie parfaite du projet original,
+possédant aussi sa propre copie de l'historique du projet original.
 
-Bob then makes some changes and commits them:
+Bob fait quelques changements et les commit:
 
-
-    (edit files)
+    (editer des fichiers)
     $ git commit -a
-    (repeat as necessary)
+    (répéter autant que nécessaire)
 
-When he's ready, he tells Alice to pull changes from the repository
-at /home/bob/myrepo.  She does this with:
+Quand il est prêt, il dit à Alice de récupérer (pull) ses changements
+depuis son dépôt situé dans /home/bob/mondepot. Alice fait alors:
 
     $ cd /home/alice/project
     $ git pull /home/bob/myrepo master
 
-This merges the changes from Bob's "master" branch into Alice's
-current branch.  If Alice has made her own changes in the meantime,
-then she may need to manually fix any conflicts.  (Note that the
-"master" argument in the above command is actually unnecessary, as it
-is the default.)
+Cela merge les changement de la branche "master" de Bob dans la branche
+courante d'Alice. Si Alice a fait ses propres changements pendant ce temps,
+alors elle devra peut être réparer quelques conflit à la main. (Notes l'option
+"master" dans la commande ci-dessus, elle n'est pas nécessaire car c'est
+l'option par défaut.)
 
-The "pull" command thus performs two operations: it fetches changes
-from a remote branch, then merges them into the current branch.
+La commande "pull" travaille donc en 2 étapes: elle récupère les changements
+d'une branche distante, et merge ces changements dans la branche courante.
 
-When you are working in a small closely knit group, it is not
-unusual to interact with the same repository over and over
-again.  By defining 'remote' repository shorthand, you can make
-it easier:
+Quand vous travaillez dans une petite équipe soudée, il est courant
+que tous interagissent très souvent avec le même dépôt. En définissant un
+raccourci pour le dépôt 'distant', nous pouvons rendre ces opération plus
+simples:
 
-    $ git remote add bob /home/bob/myrepo
+    $ git remote add bob /home/bob/mondepot
 
-With this, Alice can perform the first operation alone using the
-"git fetch" command without merging them with her own branch,
-using:
+Avec ça, Alice peut effectuer la première opération seulement en
+utilisant la commande "git fetch", elle ne mergera pas les modifications
+avec sa propre branche:
 
     $ git fetch bob
 
-Unlike the longhand form, when Alice fetches from Bob using a
-remote repository shorthand set up with `git remote`, what was
-fetched is stored in a remote tracking branch, in this case
-`bob/master`.  So after this:
+Contrairement à la version longue, quand Alice récupère (fetch) les
+données de Bob en utilisant un raccourci configuré avec 'git remote'.
+alors ce qui est récupéré est stocké dans une branche de suivi distant,
+dans notre cas 'bob/master'. Donc maintenant:
 
     $ git log -p master..bob/master
 
-shows a list of all the changes that Bob made since he branched from
-Alice's master branch.
+montre la liste de tous les changements que Bob a fait depuis qu'il a créé
+une branche depuis la branche "master" d'Alice.
 
 After examining those changes, Alice
 could merge the changes into her master branch:
