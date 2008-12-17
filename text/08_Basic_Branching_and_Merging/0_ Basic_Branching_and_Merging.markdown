@@ -1,88 +1,98 @@
-## Basic Branching and Merging ##
+## Usage Basique des Branches et des Merges ##
 
-A single git repository can maintain multiple branches of
-development.  To create a new branch named "experimental", use
+Un seul dépôt git peut maintenir de nombreuses branches de
+développement. Pour créer une nouvelle branche nommée
+"experimental", utilisez:
 
     $ git branch experimental
 
-If you now run
+Si vous lancez maintenant
 
     $ git branch
 
-you'll get a list of all existing branches:
+Vous obtiendrez la liste de toutes les branches existantes:
 
       experimental
     * master
 
-The "experimental" branch is the one you just created, and the
-"master" branch is a default branch that was created for you
-automatically.  The asterisk marks the branch you are currently on;
-type
+La branche "experimental" est celle que vous venez de créer,
+et la branche "master" est la branche par défaut qui a été
+créée automatiquement pour vous. L'astérisque signale la
+branche su laquelle vous vous trouvez. Tapez:
 
     $ git checkout experimental
 
-to switch to the experimental branch.  Now edit a file, commit the
-change, and switch back to the master branch:
+pour passer sur la branche "experimental". Éditez maintenant
+un fichier, committer le changement, et revenez sur la
+branche "master":
 
-    (edit file)
+    (éditer un fichier)
     $ git commit -a
     $ git checkout master
 
-Check that the change you made is no longer visible, since it was
-made on the experimental branch and you're back on the master branch.
+Vous pouvez vérifier que le changement que vous venez de
+faire n'est plus visible, puisqu'il a été fait sur la branche
+"experimental" et que nous sommes revenus sur la branche
+"master".
 
-You can make a different change on the master branch:
+Vous pouvez faire un changement différent sur la branche
+"master":
 
-    (edit file)
+    (éditer un fichier)
     $ git commit -a
 
-at this point the two branches have diverged, with different changes
-made in each.  To merge the changes made in experimental into master, run
+à cet instant, les 2 branches ont divergé, avec des changements
+différents faits dans chacune d'elles. Pour fusionner (merger)
+les changements effectués dans la branche "experimental" sur
+la branche "master", lancez:
 
     $ git merge experimental
 
-If the changes don't conflict, you're done.  If there are conflicts,
-markers will be left in the problematic files showing the conflict;
+Si les changements ne créent pas de conflit, vous avez fini.
+S'il y a des conflits, un marquage sera laissé dans les fichiers
+problématiques pour vous montrer le conflit:
 
     $ git diff
 
-will show this.  Once you've edited the files to resolve the
-conflicts,
+vous montrera ces marquages. Une fois que vous aurez édité les
+fichiers pour résoudre les conflits,
 
     $ git commit -a
 
-will commit the result of the merge. Finally,
+committera le résultat du merge. Enfin,
 
     $ gitk
 
-will show a nice graphical representation of the resulting history.
+vous montrera une jolie représentation graphique de l'historique
+obtenu.
 
-At this point you could delete the experimental branch with
+Maintenant, vous pouvez effacer la branche "experimental" avec
 
     $ git branch -d experimental
 
-This command ensures that the changes in the experimental branch are
-already in the current branch.
+Cette commande s'assure que les changement de la branche
+"experimental" se trouve dans la branche courante.
 
-If you develop on a branch crazy-idea, then regret it, you can always
-delete the branch with
+Si vous développez une idée folle, puis le regrettez, vous
+pouvez toujours effacer cette branche avec:
 
     $ git branch -D crazy-idea
 
-Branches are cheap and easy, so this is a good way to try something
-out.
+Les branches sont faciles et peu coûteuse, donc c'est un bon
+moyen pour tester des choses nouvelles.
 
-### How to merge ###
+### Comment merger ###
 
-You can rejoin two diverging branches of development using
-linkgit:git-merge[1]:
+Vous pouvez joindre 2 branches de développement divergentes
+en utilisant linkgit:git-merge[1]:
 
-    $ git merge branchname
+    $ git merge titrebranche
 
-merges the changes made in the branch "branchname" into the current
-branch.  If there are conflicts--for example, if the same file is
-modified in two different ways in the remote branch and the local
-branch--then you are warned; the output may look something like this:
+merge les changements fait dans la branche "titrebranche" dans la
+branche courante. Si il y a des conflits--par exemple, si le
+même fichier est modifié au même endroit de 2 façons différente
+dans la branche distante et la branche locale--vous serez avertis;
+l'avertissement peut ressembler à quelque chose comme ça:
 
     $ git merge next
      100% (4/4) done
@@ -90,30 +100,33 @@ branch--then you are warned; the output may look something like this:
     CONFLICT (content): Merge conflict in file.txt
     Automatic merge failed; fix conflicts and then commit the result.
 
-Conflict markers are left in the problematic files, and after
-you resolve the conflicts manually, you can update the index
-with the contents and run git commit, as you normally would when
-modifying a file.
+des marqueurs de conflit sont ajoutés aux fichiers problématiques,
+et après avoir résolu les conflits manuellement, vous pouvez
+mettre à jour l'index avec le nouveau contenu et lancer 
+`git commit`, comme vous le feriez quand vous modifiez un
+fichier.
 
-If you examine the resulting commit using gitk, you will see that it
-has two parents: one pointing to the top of the current branch, and
-one to the top of the other branch.
+Si vous analysez le résultat de ce commit avec gitk, vous verrez
+qu'il à 2 parents: l'un pointant vers le sommet de la branche
+courante, et l'autre pointant vers le sommet de l'autre branche.
 
-### Resolving a merge ###
+### Résoudre un merge ###
 
-When a merge isn't resolved automatically, git leaves the index and
-the working tree in a special state that gives you all the
-information you need to help resolve the merge.
+Quand un merge n'est pas résolu automatiquement, git laisse l'index
+et le "tree" de travail dans un état spécial vous donnant toutes
+les informations dont vous aurez besoin pour vous aider à résoudre
+le merge.
 
-Files with conflicts are marked specially in the index, so until you
-resolve the problem and update the index, linkgit:git-commit[1] will
-fail:
+Les fichiers en conflits sont marqués spécialement dans l'index,
+donc jusqu'à que vous ayez résolu le problème et mis à jour
+l'index, linkgit:git-commit[1] ne fonctionnera pas:
 
     $ git commit
     file.txt: needs merge
 
-Also, linkgit:git-status[1] will list those files as "unmerged", and the
-files with conflicts will have conflict markers added, like this:
+De plus, linkgit:git-status[1] vous donnera la liste de ces
+fichiers "non-mergés", et les fichiers contenant des conflits
+auront ces conflits marqués comme ceci:
 
     <<<<<<< HEAD:file.txt
     Hello world
@@ -121,44 +134,48 @@ files with conflicts will have conflict markers added, like this:
     Goodbye
     >>>>>>> 77976da35a11db4580b80ae27e8d65caf5208086:file.txt
 
-All you need to do is edit the files to resolve the conflicts, and then
+Vous n'avez plus qu'à éditer ces fichier pour résoudre les conflits,
+puis:
 
     $ git add file.txt
     $ git commit
 
-Note that the commit message will already be filled in for you with
-some information about the merge.  Normally you can just use this
-default message unchanged, but you may add additional commentary of
-your own if desired.
+Notez que le message du commit sera déjà rempli pour vous avec
+quelques informations à propos du merge. Normalement vous pouvez
+juste laisser ce message inchangé, mais vous voudrez peut être
+ajouter un commentaire additionnel si vous les désirez.
 
-The above is all you need to know to resolve a simple merge.  But git
-also provides more information to help resolve conflicts:
+Cette partie contient tout ce que vous avec besoin de savoir pour
+résoudre un merge simple. Mais git vous fournira aussi plus
+d'information pour vous aider à résoudre les conflits:
 
-### Undoing a merge ###
+### Annuler un merge ###
 
-If you get stuck and decide to just give up and throw the whole mess
-away, you can always return to the pre-merge state with
+Si vous êtes bloqués et décidés de laisser tomber en jetant tout vos
+brouillons par la fenêtre, vous pouvez toujours revenir à l'état
+où vous vous trouviez avant le merge avec la commande:
 
     $ git reset --hard HEAD
 
-Or, if you've already committed the merge that you want to throw away,
+Ou, si vous avez déjà committé le merge que vous voulez balancer,
 
     $ git reset --hard ORIG_HEAD
 
-However, this last command can be dangerous in some cases--never throw away a
-commit if that commit may itself have been merged into another branch, as
-doing so may confuse further merges.
+Cependant, cette dernière commande peut être dangereuse dans certains
+cas--ne balancez jamais un commit si ce commit était lui même le merge
+d'une autre branche, en faisant ça vous risqueriez de rendre confus
+les prochains merges.
 
-### Fast-forward merges ###
+### Avance rapide des merges ###
 
-There is one special case not mentioned above, which is treated differently.
-Normally, a merge results in a merge commit with two parents, one for each of
-the two lines of development that were merged.
+Il y a un cas spécial non-mentionné plus tôt, qui est traité différemment.
+Normalement, un merge est un commit avec 2 parents, un pour chacune des
+2 lignes de développement qui seront mergées.
 
-However, if the current branch has not diverged from the other--so every
-commit present in the current branch is already contained in the other--then
-git just performs a "fast forward"; the head of the current branch is moved
-forward to point at the head of the merged-in branch, without any new commits
-being created.
+Cependant, si la branche courante n'a pas divergé de l'autres--donc tous
+les commit présent dans la branche courant sont déjà contenus dans l'autre
+branche--alors git ne fait qu'une "avance rapide"; le sommet (head) de la
+branche courante est avancé jusqu'au point du sommet de la branche à
+merger, sans qu'aucun commit ne soit créé.
 
 [gitcast:c6-branch-merge]("GitCast #6: Branching and Merging")
