@@ -57,177 +57,180 @@ dans notre cas 'bob/master'. Donc maintenant:
 montre la liste de tous les changements que Bob a fait depuis qu'il a créé
 une branche depuis la branche "master" d'Alice.
 
-After examining those changes, Alice
-could merge the changes into her master branch:
+Après avoir examiné ces changements, Alice peut les merger dans sa branche
+"master":
 
     $ git merge bob/master
 
-This `merge` can also be done by 'pulling from her own remote
-tracking branch', like this:
+Ce `merge` peut aussi être fait en récupérant les données depuis
+sa propre branche de suivi distant, comme ceci:
 
     $ git pull . remotes/bob/master
 
-Note that git pull always merges into the current branch,
-regardless of what else is given on the command line.
+Git récupère toujours les merges dans la branche courante,
+quelques soient les options de la ligne de commande.
 
-Later, Bob can update his repo with Alice's latest changes using
+Plus tard, Bob peut mettre à jour son dot avec les dernières
+modifications d'Alice en utilisant:
 
     $ git pull
 
-Note that he doesn't need to give the path to Alice's repository;
-when Bob cloned Alice's repository, git stored the location of her
-repository in the repository configuration, and that location is
-used for pulls:
+Il n'a besoin de donner le chemin vers le dot d'Alice; quand Bob a cloné
+le dépôt d'Alice, git a stocké l'adresse de son dépôt dans la configuration
+du dépôt, et cette adresse est utilisée pour récupérer les données avec 'pull':
 
     $ git config --get remote.origin.url
     /home/alice/project
 
-(The complete configuration created by git-clone is visible using
-"git config -l", and the linkgit:git-config[1] man page
-explains the meaning of each option.)
+(La configuration complète créée par git-clone est visible en lançant
+"git config -l", et la page de documentation de linkgit:git-config[1]
+explique chacune de ces options.)
 
-Git also keeps a pristine copy of Alice's master branch under the
-name "origin/master":
+Git conserve aussi une copie propre de la branche "master" d'Alice,
+sous le nom "origin/master":
 
     $ git branch -r
       origin/master
 
-If Bob later decides to work from a different host, he can still
-perform clones and pulls using the ssh protocol:
+Si Bob décide plus tard de travailler avec un hébergeur différent,
+il pourra toujours créer des clones et récupérer les données en utilisant
+le protocole ssh:
 
     $ git clone alice.org:/home/alice/project myrepo
 
-Alternatively, git has a native protocol, or can use rsync or http;
-see linkgit:git-pull[1] for details.
+D'une autre manière, git contient un protocole natif, ou peut aussi utiliser
+rsync ou http; voir linkgit:git-pull[1] pour plus de détails.
 
-Git can also be used in a CVS-like mode, with a central repository
-that various users push changes to; see linkgit:git-push[1] and
-linkgit:gitcvs-migration[1].
+Git peut aussi être utilisé de manière plus similaire à CVS, avec un dépôt
+central sur lequel de nombreux utilisateurs envoient leur modifications;
+voir linkgit:git-push[1] et linkgit:gitcvs-migration[1].
 
+### Les Dépôt Git Publiques ###
 
-### Public git repositories ###
+Une autre façon d'envoyer des modifications à un projet est d'avertir
+le chef de ce projet afin qu'il récupère les changements depuis votre
+dépôt en utilisant linkgit:git-pull[1]. C'est un manière d'obtenir les
+mises à jours du dépôt principal, mais cela fonctionne aussi dans
+l'autre sens.
 
-Another way to submit changes to a project is to tell the maintainer
-of that project to pull the changes from your repository using
-linkgit:git-pull[1].  This is a way to get
-updates from the "main" repository, but it works just as well in the
-other direction.
-
-If you and the maintainer both have accounts on the same machine, then
-you can just pull changes from each other's repositories directly;
-commands that accept repository URLs as arguments will also accept a
-local directory name:
+Si vous et le chef de projets avaient tous les 2 un compte sur le même
+ordinateur, alors vous pouvez échanger les modifications de vos dépôts
+respectifs directement; les commandes qui acceptent des URL de dépôts
+comme options, accepteront aussi un chemin de répertoire local:
 
     $ git clone /path/to/repository
     $ git pull /path/to/other/repository
 
-or an ssh URL:
+ou une adresse ssh:
 
     $ git clone ssh://yourhost/~you/repository
 
-For projects with few developers, or for synchronizing a few private
-repositories, this may be all you need.
+Pour les projets avec quelques développeurs, ou pour synchroniser quelques
+projets privés, cela peut vous suffire.
 
-However, the more common way to do this is to maintain a separate public
-repository (usually on a different host) for others to pull changes
-from.  This is usually more convenient, and allows you to cleanly
-separate private work in progress from publicly visible work.
+Cependant, la pratique la plus courante est de maintenir un dépôt publique
+(généralement sur le même host) pour que les autres puissent y récupérer les
+changements. Cela est souvent plus efficace, et vous permet de séparer
+proprement le travail privé en cours de réalisation des projets publiques
+et visibles.
 
-You will continue to do your day-to-day work in your personal
-repository, but periodically "push" changes from your personal
-repository into your public repository, allowing other developers to
-pull from that repository.  So the flow of changes, in a situation
-where there is one other developer with a public repository, looks
-like this:
+Vous continuerez à travailler au jour-le-jour sur votre dépôt personnel,
+mais périodiquement vous enverrez (push) les modifications de votre
+dépôt personnel sur votre dépôt publique, permettant alors aux autres
+développeurs de récupérer (pull) les changements disponible dans ce dépôt.
+Donc le flux de travail, dans une situation où un autre développeur 
+fournit des changement dans son dépôt publique, ressemble à ça:
 
-                            you push
-      your personal repo ------------------> your public repo
-    	^                                     |
-    	|                                     |
-    	| you pull                            | they pull
-    	|                                     |
-    	|                                     |
-            |               they push             V
-      their public repo <------------------- their repo
+                               vous envoyez (push)
+      votre dépôt personnel ---------------------------> votre dépot publique
+                ^                                               |
+                |                                               |
+                | vous récupérez (pull)                         | ils récupèrent (pull)
+                |                                               |
+                |                                               |
+                |               ils envoient (push)             V
+      leur dépôt publique <------------------------------  leur dépôt
       
 
 
-### Pushing changes to a public repository ###
+### Publier des Modifications sur un Dépôt Publique ###
 
-Note that exporting via http or git allow other
-maintainers to fetch your latest changes, but they do not allow write
-access.  For this, you will need to update the public repository with the
-latest changes created in your private repository.
+L'utilisation des protocoles http et git permet aux autres développeurs
+de récupérer les derniers changements, mais ils n'auront pas l'autorisation
+d'écriture sur ces dépôt. Pour cela, vous devrez mettre à jour votre dépôt
+publique avec les derniers changements obtenus votre le dépôt privé.
 
-The simplest way to do this is using linkgit:git-push[1] and ssh; to
-update the remote branch named "master" with the latest state of your
-branch named "master", run
+La façon la plus simple de procéder est d'utiliser linkgit:git-push[1] et ssh;
+pour mettre à jour la brancje "master" avec le dernier état de votre branche
+"master", lancez:
 
     $ git push ssh://yourserver.com/~you/proj.git master:master
 
-or just
+ou juste
 
     $ git push ssh://yourserver.com/~you/proj.git master
 
-As with git-fetch, git-push will complain if this does not result in a
-fast forward; see the following section for details on
-handling this case.
+Comem avec git-fetch, git-push se plaindra qu'il n'y a pas eu d'avance rapide
+(fast-forward); allez à la section suivante pour plus de détails pour gérer
+ce cas.
 
-Note that the target of a "push" is normally a bare repository.  You can also push to a
-repository that has a checked-out working tree, but the working tree
-will not be updated by the push.  This may lead to unexpected results if
-the branch you push to is the currently checked-out branch!
+La cible d'un "push" est normalement un dépôt 'nu'. Vous pouvez aussi publier
+vers un dépôt qui contient une arborescence de travail, mais cette arborescence
+ne sera pas mise à jour durant la publication. Cela pourra vous amener à des
+résultats inattendus, par exemple si la branche que vous publiez est l'actuelle
+branche de travail sur le dépôt publique.
 
-As with git-fetch, you may also set up configuration options to
-save typing; so, for example, after
+Comme avec git-fetch, vous pouvez aussi rajouter des options de configuration
+pour vous permettre d'aller plus rapidement; par exemple, après:
 
     $ cat >>.git/config <<EOF
     [remote "public-repo"]
     	url = ssh://yourserver.com/~you/proj.git
     EOF
 
-you should be able to perform the above push with just
+vous devriez pouvoir effectuer les opérations précédentes avec juste
 
     $ git push public-repo master
 
-See the explanations of the remote.<name>.url, branch.<name>.remote,
-and remote.<name>.push options in linkgit:git-config[1] for
-details.
+Voir les explications des options remote.<name>.url, branch.<name>.remote,
+et remote.<name>.push dans linkgit:git-config[1] pour plus de détails.
 
-### What to do when a push fails ###
+### Que faire quand une publication échoue ###
 
-If a push would not result in a fast forward of the
-remote branch, then it will fail with an error like:
+Si une publication ne se termine pas avec une avance de la branche distante,
+alors elle échouera avec un message d'erreur comme celui-ci:
 
     error: remote 'refs/heads/master' is not an ancestor of
     local  'refs/heads/master'.
     Maybe you are not up-to-date and need to pull first?
     error: failed to push to 'ssh://yourserver.com/~you/proj.git'
 
-This can happen, for example, if you:
+Cela peut arrivé, par exemple, si:
 
-	- use `git-reset --hard` to remove already-published commits, or
-	- use `git-commit --amend` to replace already-published commits, or
-	- use `git-rebase` to rebase any already-published commits.
+	- vous avez utilisé `git-reset --hard` pour effacer un commit déjà publié, ou
+	- vous avez utilisé `git-commit --amend` pour remplacer un commit déjà publié, ou
+	- vous avez utilisé `git-rebase` pour recombiner un commit déjà publié.
 
-You may force git-push to perform the update anyway by preceding the
-branch name with a plus sign:
+Vous pouvez forcer un git-push à effectuer quand même la mise à jour
+en rajoutant le préfixe '+' au nom de la branche:
 
     $ git push ssh://yourserver.com/~you/proj.git +master
 
-Normally whenever a branch head in a public repository is modified, it
-is modified to point to a descendant of the commit that it pointed to
-before.  By forcing a push in this situation, you break that convention.
+Normalement, quand le sommet de la branche d'un dépôt publique est modifié,
+il est modifié pour pointer vers un descendant du commit ver lequel il
+pointait avant. En forçant la publication dans cette situation, vous
+cassez cette convention.
 
-Nevertheless, this is a common practice for people that need a simple
-way to publish a work-in-progress patch series, and it is an acceptable
-compromise as long as you warn other developers that this is how you
-intend to manage the branch.
+Néanmoins, c'est une bonne pratique pour les gens qui ont besoin de publier
+simplement une série de patches des travaux en cours, et c'est un
+compromis acceptable tant que vous prévenez les autres développeurs que
+vous comptez gérer la branche de cette façon.
 
-It's also possible for a push to fail in this way when other people have
-the right to push to the same repository.  In that case, the correct
-solution is to retry the push after first updating your work: either by a
-pull, or by a fetch followed by a rebase; see the next section and
-linkgit:gitcvs-migration[7] for more.
+Il est aussi possible qu'une publication échoue de cette façon quand
+d'autres personnes ont le droit de publier sur le même dépôt. Dans ce cas,
+la solution la plus correcte est de retenter la publication après avoir mis
+à jour votre travail: soit par un git-pull, soit par un git-fetch suivi
+d'une recombinaison (rebase); voir la prochaine partie et
+linkgit:gitcvs-migration[7] pour plus de détails.
 
 [gitcast:c8-dist-workflow]("GitCast #8: Distributed Workflow")
