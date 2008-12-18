@@ -1,6 +1,5 @@
-## Modifying your History ##
+## Modifier votre Historique ##
 
-Interactive rebasing is a good way to modify individual commits.
+La recombinaison interactive est une manière simple pour modifier des commits individuels.
 
-linkgit:git-filter-branch[1] is a good way to edit commits en masse.
-
+La commande linkgit:git-filter-branch[1] est une bonne façon de faire des commits en masse.
