@@ -1,67 +1,69 @@
-## Rebasing ##
+## Recombinaison (rebase) ##
 
-Suppose that you create a branch "mywork" on a remote-tracking branch
-"origin".
+Supposons que vous avez créé une branche "mywork" sur une branche
+de suivi distante "origin".
 
     $ git checkout -b mywork origin
 
 [fig:rebase0]
 
-Now you do some work, creating two new commits.
+Maintenant travaillez un peu dessus, en créant 2 commits.
 
-    $ vi file.txt
+    $ vi fichier.txt
     $ git commit
-    $ vi otherfile.txt
+    $ vi autrefichier.txt
     $ git commit
     ...
-    
-Meanwhile, someone else does some work creating two new commits on the origin
-branch too. This means both 'origin' and 'mywork' has advanced, which means 
-the work has diverged.
+
+Pendant ce temps, quelqu'un d'autre travaille en créant aussi 2 nouveaux
+commits sur la branche d'origine. Cela signifie que les 2 branches
+'origine' et 'mywork' ont avancées, et elle ont aussi divergées.
 
 [fig:rebase1]
 
-At this point, you could use "pull" to merge your changes back in;
-the result would create a new merge commit, like this:
+À ce moment, vous pouvez utiliser "pull" pour merger vos modifications;
+le résultat créera un nouveau commit 'merge', comme ceci:
 
 [fig:rebase2]
 
-However, if you prefer to keep the history in mywork a simple series of
-commits without any merges, you may instead choose to use
-linkgit:git-rebase[1]:
+Cependant, si vous préférez garder l'historique de 'mywork' sous
+l'aspect d'une simple série de commits sans 'merge', vous pouvez aussi
+utiliser linkgit:git-rebase[1]:
 
     $ git checkout mywork
     $ git rebase origin
 
-This will remove each of your commits from mywork, temporarily saving
-them as patches (in a directory named ".git/rebase"), update mywork to
-point at the latest version of origin, then apply each of the saved
-patches to the new mywork.  
+Cette commande va retirer chacun de vos commit sur 'mywork', en les
+sauvegardant temporairement comme des patches (dans le dossier ".git/rebase"),
+puis mettre à jour la branche 'mywork' avec la dernière version de la
+branche 'origin', et enfin appliquer chaque patch sauvegardé à cette nouvelle
+version de 'mywork'.
 
 [fig:rebase3]
 
-Once the ref ('mywork') is updated to point to the newly created commit 
-objects, your older commits will be abandoned.  They will likely be
-removed if you run a pruning garbage collection. (see linkgit:git-gc[1])
+Une fois que la référence ('mywork') est mise à jour jusqu'au dernier objet
+commit créé, vos anciens commits seront abandonnés. Ils seront sûrement
+effacer si vous lancer la commande de ramasse-miettes. (voir linkgit:git-gc[1])
 
 [fig:rebase4]
 
-So now we can look at the difference in our history between running a merge
-and running a rebase:
+Maintenant nous pouvons voir la différence de l'historique entre l'exécution
+d'un merge et l'exécution d'une recombinaison (rebase):
 
 [fig:rebase5]
 
-In the process of the rebase, it may discover conflicts.  In that case it will stop
-and allow you to fix the conflicts; after fixing conflicts, use "git-add"
-to update the index with those contents, and then, instead of
-running git-commit, just run
+Dans le processus d'une recombinaison, des conflits peuvent se produire.
+Dans ce cas, le processus s'arrêtera et vous permettra de réparer ces conflits;
+après les avoir fixés, utilisez "git-add" pour mettre à jour l'index avec ce
+nouveau contenu, puis, au lieu de lancer git-commit, lancez juste:
 
     $ git rebase --continue
 
-and git will continue applying the rest of the patches.
+et git continuera d'appliquer le reste des patches.
 
-At any point you may use the `--abort` option to abort this process and
-return mywork to the state it had before you started the rebase:
+À n'importe quel moment, vous pouvez utiliser l'option `--abort` pour
+annuler le processus et retourner au même état de 'mywork' qu'au
+démarrage de la recombinaison:
 
     $ git rebase --abort
 
