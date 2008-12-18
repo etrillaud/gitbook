@@ -1,35 +1,39 @@
-## Stashing ##
+## Le Cache (Stashing) ##
 
-While you are in the middle of working on something complicated, you
-find an unrelated but obvious and trivial bug.  You would like to fix it
-before continuing.  You can use linkgit:git-stash[1] to save the current
-state of your work, and after fixing the bug (or, optionally after doing
-so on a different branch and then coming back), unstash the
-work-in-progress changes.
+Quand vous êtes au milieu d'une grosse modification, il se peut que vous
+trouviez un énorme bug qui doit être corrigé rapidement. Vous
+aimeriez le corriger avant de continuer vos modifications. Vous pouvez
+utiliser linkgit:git-stash[1] pour sauvegarder l'état actuel de votre
+travail, et une fois le bug éliminé (ou, éventuellement, en revenant sur
+la branche après l'avoir corrigé sur une branche différente), retrouver
+les changement du travail en cours.
 
-    $ git stash "work in progress for foo feature"
+    $ git stash "travail en cours de la fonctionnalité conquerir-le-monde"
 
-This command will save your changes away to the `stash`, and
-reset your working tree and the index to match the tip of your
-current branch.  Then you can make your fix as usual.
+Cette commande sauvegardera vos changement dans le `stash`, et
+remettra à zéro votre répertoire de travail et l'index afin de 
+correspondre avec le sommet de la branche courante. Après vous pouvez
+faire vos corrections comme d'habitude.
 
-    ... edit and test ...
-    $ git commit -a -m "blorpl: typofix"
+    ... éditer et tester ...
+    $ git commit -a -m "machin: bidulefix"
 
-After that, you can go back to what you were working on with
-`git stash apply`:
+Après ça, vous pouvez revenir là où vous étiez en train de travailler
+avec `git stash apply`:
 
     $ git stash apply
 
 
-### Stash Queue ###
+### La File de Cache (Stash Queue) ###
 
-You can also use stashing to queue up stashed changes.  
-If you run 'git stash list' you can see which stashes you have saved:
+Vous pouvez aussi utiliser le cache pour empiler vos changements cachés.
+Si vous lancez 'git stash list', vous verrez quelles caches vous avez
+sauvegardé:
 
 	$>git stash list
 	stash@{0}: WIP on book: 51bea1d... fixed images
 	stash@{1}: WIP on master: 9705ae6... changed the browse code to the official repo
 
-Then you can apply them individually with 'git stash apply stash@{1}'.  You
-can clear out the list with 'git stash clear'.
+Ensuite vous pouvez les sélectionner individuellement pour les appliquer avec
+'git stash apply stash@{1}'. Vous pouvez nettoyer la liste avec
+'git stash clear'.
