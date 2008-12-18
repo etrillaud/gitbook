@@ -1,8 +1,8 @@
-## Interactive Adding ##
+## Ajout Interactif ##
 
-Interactive Adding is a really nice way of working with and visualizing
-the Git index.  To start it up, simply type 'git add -i'.  Git will show
-you all the modified files you have and their status.
+Il est vraiment intéressant de travailler et de visualiser l'index de Git avec
+les ajouts interactifs. Pour le démarrer, tape simplement 'git add -i'. Git
+vous montrera tous vos fichiers modifiés et leur état.
 
 	$>git add -i
 	           staged     unstaged path
@@ -17,14 +17,15 @@ you all the modified files you have and their status.
 	  5: patch	  6: diff	  7: quit	  8: help
 	What now> 
 
-In this case, we can see that there are 5 modified files that have not been
-added to our index yet (unstaged), and even how many lines have been added to
-or removed from each.  It then shows us an interactive menu of what we can
-do in this mode.
+Dans ce cas, nous pouvons voir 5 fichiers modifiés qui n'ont pas encore étés
+ajoutés à l'index (unstaged), et le nombre de lignes en plus ou en moins pour
+chacun d'eux. Nous trouvons aussi un menu interactif avec les possibilités de
+cet outils.
 
-If we want to stage the files, we can type '2' or 'u' for the update mode. 
-Then I can specify which files I want to stage (add to the index) by typing
-in the numbers of the files (in this case, 1-4)
+Si nous voulons rajouter les fichiers dans l'index, nous pouvons taper '2'
+ou 'u' pour le mode de mise à jour (update). Après, nous devons sélectionner
+les fichiers que nous voulons rajouter à l'index en saisissant les numéros
+de ces fichiers (dans ce cas, 1-4):
 
 	What now> 2
 	           staged     unstaged path
@@ -42,8 +43,8 @@ in the numbers of the files (in this case, 1-4)
 	  5:    unchanged      +121/-0 text/14_Interactive_Rebasing/0_ Interactive_Rebasing.markdown
 	Update>> 
 
-If I hit enter, I will be taken back to the main menu where I can see that
-the file status has changed:
+Si je presse 'entrée', je reviendrai au menu principal où je peux voir que
+l'état des fichiers a changé.
 
 	What now> status
 	           staged     unstaged path
@@ -53,9 +54,9 @@ the file status has changed:
 	  4:        +3/-3      nothing script/pdf.rb
 	  5:    unchanged      +121/-0 text/14_Interactive_Rebasing/0_ Interactive_Rebasing.markdown
 
-Now we can see the first four files are staged and the last one is still not.
-This is basically a compressed way to see the same information we see when
-we run 'git status' from the command line:
+Maintenant nous voyons que les 4 premiers fichiers sont assemblés et que le
+dernier ne l'est pas encore. Ces informations sont simplement une compression
+de l'affichage obtenu avec la command 'git status':
 
 	$ git status
 	# On branch master
@@ -73,20 +74,23 @@ we run 'git status' from the command line:
 	#	modified:   text/14_Interactive_Rebasing/0_ Interactive_Rebasing.markdown
 	#
 
-There are a number of useful things we can do, including unstaging files (3: revert),
-adding untracked files (4: add untracked), and viewing diffs (6: diff). Those
-are all pretty straightforward.  However, there is one command that is pretty
-cool here, which is staging patches (5: patch).
+Il y a quelques options utiles dans ce mode d'ajout interactif, comme
+retirer des fichiers de l'index (3: revert), ajouter des fichier non-suivis
+(4: add untracked), et voir les différences (6: view diff). Ces options
+sont assez faciles à comprendre. Cependant, il y a une commande plutôt
+cool qui demande des explications: l'assemblage de patches (5: patch).
 
-If you type '5' or 'p' in the menu, git will show you your diff patch by patch 
-(or hunk by hunk) and ask if you want to stage each one.  That way you can 
-actually stage for a commit a part of a file edit.  If you've edited a file
-and want to only commit part of it and not an unfinished part, or commit 
-documentation or whitespace changes seperate from substantive changes, you can
-use 'git add -i' to do so relatively easily.
+Si vous tapez '5' ou 'p' dans le menu, git vous montrera vos différences
+patch par patch (ou morceau par morceau) et vous demandera si vous voulez
+assembler chacun d'eux. De cette façon, vous pouvez n'assembler qu'une
+partie d'un fichier modifié. Si vous avez édité un fichier et ne voulez
+committer qu'une partie des modifications et laisser les autres modifications
+dans un état inachevé, ou séparer les commits de documentation de ceux des
+changements plus conséquents, vous pouvez utiliser 'git add -i' pour le 
+faire facilement.
 
-Here I've staged some changes to the book_index_template.html file, but not all
-of them:
+Ici j'ai assemblé quelques changements au fichier book_index_template.html,
+mais pas tous:
 
 	         staged     unstaged path
 	1:        +4/-0      nothing assets/stylesheets/style.css
@@ -96,9 +100,10 @@ of them:
 	5:    unchanged      +121/-0 text/14_Interactive_Rebasing/0_ Interactive_Rebasing.markdown
 	6:    unchanged       +85/-0 text/15_Interactive_Adding/0_ Interactive_Adding.markdown
 
-When you are done making changes to your index through 'git add -i', you simply
-quit (7: quit) and then run 'git commit' to commit the staged changes.  Remember
-**not** to run 'git commit -a', which will blow away all the careful changes 
-you've just made and simply commit everything.
+Quand vous avez terminer de modifier votre index avec 'git add -i',
+il vous suffit de quitter (7: quit) et de lancer 'git commit' pour committer
+les changements assemblés. Souvenez-vous de **ne pas lancer** 'git commit -a',
+cela effacerait tous les précieuses sélections que vous avez faites dans le
+mode interactif et committera tout d'un coup.
 
 [gitcast:c3_add_interactive]("GitCast #3: Interactive Adding")
