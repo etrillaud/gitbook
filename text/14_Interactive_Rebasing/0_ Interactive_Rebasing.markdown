@@ -1,26 +1,29 @@
-## Interactive Rebasing ##
+## Recombinaison interactive ##
 
-You can also rebase interactively.  This is often used to re-write your
-own commit objects before pusing them somewhere.  It is an easy way to 
-split, merge or re-order commits before sharing them with others.  You
-can also use it to clean up commits you've pulled from someone when
-applying them locally.
+Vous pouvez aussi recombiner (rebase) les commits interactivement.
+Ceci s'utilise souvent pour ré-écrire vos objets commits avant de les publier.
+C'est une manière simple de découper, regrouper et ré-ordonner les commits
+avant de les partager avec les autres. Vous pouvez aussi utiliser ça pour
+nettoyer les commits que vous récupérerez chez quelqu'un avant de les appliquer
+localement.
 
-If you have a number of commits that you would like to somehow modify
-during the rebase, you can invoke interactive mode by passing a '-i' or
-'--interactive' to the 'git rebase' command.
+Si vous voulez modifier interactivement vos commit durant la recombinaison,
+vous pouvez activer le mode interactif en utilisant l'option '-i' ou
+'--interactive' avec la commande 'git rebase'.
 
 	$ git rebase -i origin/master
-	
-This will invoke interactive rebase mode on all the commits you have made
-since the last time you have pushed (or merged from the origin repository).
 
-To see what commits those are beforehand, you can run log this way:
+Cela lancera le mode interactif de recombinaison, avec tous les commits
+que vous avez créé depuis votre dernière publication (ou le dernier
+merge depuis le dépôt d'origine).
+
+Pour voir quels commits seront concernés, vous pouvez utiliser la
+commande 'log' de cette façon:
 	
 	$ git log github/master..
-	
-Once you run the 'rebase -i' command, you will be thrown into your editor
-of choice with something that looks like this:
+
+Quand vous lancerez la commande 'rebase -i', vous vous trouverez dans
+un éditeur qui ressemblera à ça:
 
 	pick fc62e55 added file_size
 	pick 9824bf4 fixed little thing
@@ -39,24 +42,25 @@ of choice with something that looks like this:
 	# However, if you remove everything, the rebase will be aborted.
 	#
 
-This means that there are 5 commits since you last pushed and it gives you 
-one line per commit with the following format:
+Cela signifie qu'il y a 5 commits depuis votre dernière publication et
+chaque commit est décrit par un ligne avec le format suivant:
 
-	(action) (partial-sha) (short commit message)
+	(action) (sha partiel) (court message du commit)
 	
-Now, you can change the action (which is by default 'pick') to either 'edit'
-or 'squash', or just leave it as 'pick'.  You can also reorder the commits
-just by moving the lines around however you want.  Then, when you exit the 
-editor, git will try to apply the commits however they are now arranged and
-do the action specified. 
+Maintenant, vous pouvez changer l'action (qui est 'pick' par défaut) soit
+par 'edit', ou 'squash', ou juste la laisser comme elle est ('pick').
+Vous pouvez aussi ré-ordonner les commits en déplaçant les lignes comme
+vous le voulez. Ensuite, quand vous sortez de l'éditeur, git essayera
+d'appliquer les commits en suivant leur ordre d'arrangement et l'action
+sélectionnée.
 
-If 'pick' is specified, it will simply try to apply the patch and save the 
-commit with the same message as before.
+Si 'pick' est sélectionné, il essayera simplement d'appliquer le patch et
+de sauvegarder le commit avec le même message qu'avant.
 
-If 'squash' is specified, it will combine that commit with the previous one
-to create a new commit.  This will drop you into your editor again to merge
-the commit messages of the two commits it is now squashing together.  So, 
-if you exit the editor with this:
+Si 'squash' est sélectionné, il combinera ce commit avec le précédent pour
+former un nouveau commit. Vous trouverez alors un autre éditeur pour merger
+les messages des 2 commit qui ont étés assemblés ensemble. Donc, si vous
+sortez du premier éditeur de la manière suivante:
 
 	pick   fc62e55 added file_size
 	squash 9824bf4 fixed little thing
@@ -64,7 +68,7 @@ if you exit the editor with this:
 	squash 76b9da6 added the apply command
 	squash c264051 Revert "added file_size" - not implemented correctly
 
-Then you will have to create a single commit message from this:
+vous devrez créer un nouveau message de commit `partir de ça:
 
 	# This is a combination of 5 commits.
 	# The first commit's message is:
@@ -88,8 +92,8 @@ Then you will have to create a single commit message from this:
 
 	This reverts commit fc62e5543b195f18391886b9f663d5a7eca38e84.
 
-Once you have edited that down into once commit message and exit the editor,
-the commit will be saved with your new message.
+Une fois que vous aurez édité cette partie en un seul message et quitté
+l'éditeur, le commit sera sauvegardé avec votre nouveau message.
 
 If 'edit' is specified, it will do the same thing, but then pause before 
 moving on to the next one and drop you into the command line so you can 
