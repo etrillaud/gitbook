@@ -95,12 +95,12 @@ vous devrez créer un nouveau message de commit `partir de ça:
 Une fois que vous aurez édité cette partie en un seul message et quitté
 l'éditeur, le commit sera sauvegardé avec votre nouveau message.
 
-If 'edit' is specified, it will do the same thing, but then pause before 
-moving on to the next one and drop you into the command line so you can 
-amend the commit, or change the commit contents somehow.
+Si vous avec sélectionné 'edit', la même chose se passera, mais un pause
+sera marqué entre chaque commit pour vous donner la main avec une ligne de
+commande afin que vous puissiez modifier le commit, ou son contenu.
 
-If you wanted to split a commit, for instance, you would specify 'edit' for
-that commit:
+Par exemple, si vous voulez découper un commit, vous sélectionnerez 'edit'
+pour ce commit:
 
 	pick   fc62e55 added file_size
 	pick   9824bf4 fixed little thing
@@ -108,20 +108,22 @@ that commit:
 	pick   76b9da6 added the apply command
 	pick   c264051 Revert "added file_size" - not implemented correctly
 
-And then when you get to the command line, you revert that commit and create
-two (or more) new ones.  Lets say 21d80a5 modified two files, file1 and file2,
-and you wanted to split them into seperate commits.  You could do this after
-the rebase dropped you to the command line :
+RY quand vous vous trouverez avec la ligne de commande, vous pourrez revenir
+sur ce commit pour en créer deux (ou plus) nouveaux. Disons que 21d80a5
+modifie 2 fichiers, fichier1 et fichier2, et que vous voulez le découper en
+2 commits séparés. Vous pouvez faire ceci quand la recombinaison vous
+redonne la main avec la ligne de commande:
 
 	$ git reset HEAD^
-	$ git add file1
-	$ git commit 'first part of split commit'
-	$ git add file2
-	$ git commit 'second part of split commit'
+	$ git add fichier1
+	$ git commit 'première partie du commit découpé'
+	$ git add fichier2
+	$ git commit 'seconde partie du commit découpé'
 	$ git rebase --continue
 	
-And now instead of 5 commits, you would have 6.
+Et maintenant, au lieu d'avoir 5 commits, vous en avez 6.
 
-The last useful thing that interactive rebase can do is drop commits for you.
-If instead of choosing 'pick', 'squash' or 'edit' for the commit line, you 
-simply remove the line, it will remove the commit from the history.
+La recombinaison interactive peut vous aider sur un dernier point utilise,
+elle peut oublier des commits. Si au lieu de sélectionner 'pick', 'squash'
+ou 'edit' pour la ligne de commit, vous effacez simplement la ligne, alors
+le commit sera retiré de l'historique.
