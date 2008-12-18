@@ -1,16 +1,17 @@
-## Creating New Empty Branches ##
+## Création de Nouvelles Branches Vides ##
 
-Ocasionally, you may want to keep branches in your repository that do not
-share an ancestor with your normal code.  Some examples of this might be
-generated documentation or something along those lines.  If you want to 
-create a new branch head that does not use your current codebase as a 
-parent, you can create an empty branch like this:
+Parfois, vous voudrez peut-être garder certaines branches dans votre dépôt
+qui ne partagent pas d'ancêtre en commun avec votre code normal. Des exemples
+de ce genre d'utilisation peut être de la documentation automatiquement
+générée ou des choses dans ce style. Si vous voulez créer une nouvelle
+branche qui n'utilise pas la base du code actuelle comme parent,
+vous pouvez créer une branche vide comme ceci:
 
-    git symbolic-ref HEAD refs/heads/newbranch 
+    git symbolic-ref HEAD refs/heads/nouvellebranche 
     rm .git/index 
     git clean -fdx 
-    <do work> 
-    git add your files 
-    git commit -m 'Initial commit'
+    <travailler> 
+    git add vos fichiers 
+    git commit -m 'Premier commit'
     
 [gitcast:c9-empty-branch]("GitCast #7: Creating Empty Branches")
