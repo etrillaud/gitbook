@@ -1,47 +1,49 @@
-## Git and Email ##
+## Git et les Mails ##
 
-### Submitting patches to a project ###
+### Envoyer des patches pour un projet ###
 
-If you just have a few changes, the simplest way to submit them may
-just be to send them as patches in email:
+Si vous avez juste effectué quelques modifications, le mail est la manière
+la plus simple d'envoyer ces changements comme patches:
 
-First, use linkgit:git-format-patch[1]; for example:
+D'abord, utilisez linkgit:git-format-patch[1]; par exemple:
 
     $ git format-patch origin
 
-will produce a numbered series of files in the current directory, one
-for each patch in the current branch but not in origin/HEAD.
+produira un liste numérotée de fichiers présent dans le répertoire actuel,
+avec un élément de la liste pour chaque patch de la branche courante qui
+n'est pas présent dans la branche d'origine distante (origin/HEAD).
 
-You can then import these into your mail client and send them by
-hand.  However, if you have a lot to send at once, you may prefer to
-use the linkgit:git-send-email[1] script to automate the process.
-Consult the mailing list for your project first to determine how they
-prefer such patches be handled.
+Vous pouvez ensuite importer ce texte dans votre client mail, et
+l'envoyer manuellement. Cependant, si vous avez beaucoup de patches
+à envoyer en même temps, il est préférable d'utiliser le script
+linkgit:git-send-email[1] pour automatiser le processus. Consultez
+la mailing-list du projet concerné pour savoir comment ces patches
+sont habituellement gérés.
 
+### Importer les patches dans un project ###
 
-### Importing patches to a project ###
-
-Git also provides a tool called linkgit:git-am[1] (am stands for
-"apply mailbox"), for importing such an emailed series of patches.
-Just save all of the patch-containing messages, in order, into a
-single mailbox file, say "patches.mbox", then run
+Git fournit aussi un outil nommée linkgit:git-am[1]; (am signifiant
+"apply mailbox"), pour important un série de mails contenant des
+patches. Sauvegardez tous les messages des mails contenant les
+patches, dans l'ordre, dans une seule boite mail, disons "patches-mbox",
+et lancez:
 
     $ git am -3 patches.mbox
 
-Git will apply each patch in order; if any conflicts are found, it
-will stop, and you can fix the conflicts as described in
-"<<resolving-a-merge,Resolving a merge>>".  (The "-3" option tells
-git to perform a merge; if you would prefer it just to abort and
-leave your tree and index untouched, you may omit that option.)
+Git appliquera chaque patch dans l'ordre; quand un conflit est trouvé,
+il s'arrêtera et vous pourrez réparer les conflits comme décrit dans
+"<<resolving-a-merge,Résoudre un merge>>". (L'option "-3" dit à git
+d'effectuer un merge; si vous préférer juste laisser votre branche et
+index inchangés, vous pouvez omettre cette option).
 
-Once the index is updated with the results of the conflict
-resolution, instead of creating a new commit, just run
+Une fois que l'index est mis à jour avec la résolution du conflit,
+au lieu de créer un nouveau commit, lancez juste:
 
     $ git am --resolved
 
-and git will create the commit for you and continue applying the
-remaining patches from the mailbox.
+et git créera un commit pour vous, et continuera d'appliquer les
+patches restant dans la boite mail.
 
-The final result will be a series of commits, one for each patch in
-the original mailbox, with authorship and commit log message each
-taken from the message containing each patch.
+Le résultat final sera une série de commits, un par patch présent
+dans la boite mail originale, avec l'auteur et le message du commit
+venant du mail correspondant à chaque patch.
