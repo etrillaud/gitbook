@@ -1,1 +1,1 @@
-##Subversion Integration
+##Intégration de Subversion
