@@ -1,4 +1,4 @@
-## Git and Editors ##
+## Git et les Editeurs de Code ##
 
 textmate 
 
