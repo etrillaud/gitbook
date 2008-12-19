@@ -1,23 +1,23 @@
-## Scripting and Git ##
+## Le Langage de Script et Git ##
 
 
-### Ruby and Git ###
+### Ruby et Git ###
 
 grit
 
 jgit + jruby
 
 
-### PHP and Git ###
+### PHP et Git ###
 
 
 
-### Python and Git ###
+### Python et Git ###
 
 pygit
 
 
-### Perl and Git ###
+### Perl et Git ###
 
 perlgit
 
