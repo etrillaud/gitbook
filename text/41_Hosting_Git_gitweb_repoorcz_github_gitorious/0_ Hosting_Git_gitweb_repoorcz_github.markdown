@@ -1,4 +1,4 @@
-## Hosted Git ##
+## Hébergement Git ##
 
 github
 
