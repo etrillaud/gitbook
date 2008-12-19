@@ -1,33 +1,34 @@
-## SCM Migration ##
+## Migration depuis un autre SCM ##
 
-So you've made the decision to move away from your existing system
-and convert your whole project to Git.  How can you do that easily?
+Vous avez décidé de migrez depuis un autre système de contrôle de version
+et convertir l'intégralité de votre projet vers Git. Comment le faire
+facilement?
 
-### Importing Subversion ###
+### Importation depuis Subversion ###
 
-Git comes with a script called git-svn that has a clone command that
-will import a subversion repository into a new git repository.  There
-is also a free tool on the GitHub service that will do this for you.
+Git est fournit avec un script nommé git-svn qui est une commande de clonage
+qui importe un dépôt subversion dans un nouveau dépôt git. Il existe aussi
+un outil gratuit sur le service GitHub qui fera cette manipulation pour
+vous.
 	
 	$ git-svn clone http://my-project.googlecode.com/svn/trunk new-project
 
-This will give you a new Git repository with all the history of the
-original Subversion repo.  This takes a pretty good amount of time, generally,
-since it starts with version 1 and checks out and commits locally every
-single revision one by one.
+Ceci vous donnera un nouveau dépôt Git avec tout l'historique du dépôt
+Subversion original. Cela peut prendre beaucoup de temps, puisque qu'il démarre
+avec la version 1 du projet subversion puis vérifie et commit localement
+chaque révision une par une.
 
-### Importing Perforce ###
+### Importation depuis Perforce ###
 
-In contrib/fast-import you will find the git-p4 script, which is a 
-Python script that will import a Perforce repository for you.
+Dans le répertoire contrib/fast-import, vous trouverez le script git-p4.
+C'est un script python qui importera un dépôt Perforce pour vous.
 
 	$ ~/git.git/contrib/fast-import/git-p4 clone //depot/project/main@all myproject
-	
 
-### Importing Others ###
+### Importation depuis un autre SCM ###
 
-These are other SCMs that listed high on the Git Survey, should find import
-docs for them.  !!TODO!!
+Il y a d'autres SCMs listés en tête du Sondage Git, de la documentation est nécesaire
+pour eux. !!TODO!!
 
 * CVS
 * Mercurial (hg)
