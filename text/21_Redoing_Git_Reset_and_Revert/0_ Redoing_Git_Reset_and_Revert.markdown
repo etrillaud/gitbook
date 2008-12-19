@@ -1,82 +1,86 @@
-## Undoing in Git - Reset, Checkout and Revert ##
+## Réparation avec Git - Reset, Checkout et Revert ##
 
-Git provides multiple methods for fixing up mistakes as you
-are developing.  Selecting an appropriate method depends on whether
-or not you have committed the mistake, and if you have committed the
-mistake, whether you have shared the erroneous commit with anyone else.
+Git fournit plusieurs méthodes pour réparer vos erreurs durant
+votre développement. Choisir la bonne méthode dépend si
+si vous avez committé ou non votre erreur, et si elle a été
+committée, si cette erreur a déjà été récupérée par un autre
+développeur.
 
-### Fixing un-committed mistakes ###
+### Réparer une erreur non-committée ###
 
-If you've messed up the working tree, but haven't yet committed your
-mistake, you can return the entire working tree to the last committed
-state with
+Si vous vous Êtres embrouillez dans votre répertoire de travail, mais
+que vous n'avez pas encore committé vos erreurs, vous pouvez retrouver
+l'intégrité de votre répertoire dans l'état qu'il était après le dernier
+commit en utilisant:
 
     $ git reset --hard HEAD
 
-This will throw away any changes you may have added to the git index
-and as well as any outstanding changes you have in your working tree.
-In other words, it causes the results of "git diff" and "git diff --cached"
-to both be empty.
+Cela effacera toutes les modifications que vous avec ajouté à l'index git
+et aussi les changements qui sont présents dans votre répertoire de travail
+mais qui n'ont pas été ajoutés à l'index. En d'autres mots, après cette
+commande, le résultat de "git diff" et "git diff --cached" sera vide.
 
-If you just want to restore just one file, say your hello.rb, use
-linkgit:git-checkout[1] instead
+Si vous ne voulez restaurer qu'un seul fichier, par exemple hello.rb,
+utiliser plutôt linkgit:git-checkout[1]
 
     $ git checkout -- hello.rb
     $ git checkout HEAD hello.rb
 
-The first command restores hello.rb to the version in the index,
-so that "git diff hello.rb" returns no differences.  The second command
-will restore hello.rb to the version in the HEAD revision, so
-that both "git diff hello.rb" and "git diff --cached hello.rb"
-return no differences.
+La première commande restaure hello.rb à la version de l'index,
+afin que "git diff hello.rb" ne retourne aucune différence. La seconde
+commande restaurera  hello.rb à la version de la révision HEAD, afin que
+"git diff hello.rb" et "git diff --cached hello.rb" ne retourne aucune
+différence.
 
-### Fixing committed mistakes ###
+### Réparer une erreurs committée ###
 
-If you make a commit that you later wish you hadn't, there are two
-fundamentally different ways to fix the problem:
+Si vous avez déjà committé ce que vous n'auriez pas du, il y a 2 façons
+fondamentalement différentes de régler le problème:
 
-1. You can create a new commit that undoes whatever was done
-    by the old commit.  This is the correct thing if your
-    mistake has already been made public.
+1. vous pouvez créer un nouveau commit qui annule les changements
+	du dernier commit. C'est la manière correcte de s'y prendre si
+	votre erreur est déjà publique.
 
-2. You can go back and modify the old commit.  You should
-    never do this if you have already made the history public;
-    git does not normally expect the "history" of a project to
-    change, and cannot correctly perform repeated merges from
-    a branch that has had its history changed.
+2. Vous pouvez revenir en arrière et modifier l'ancien commit. Vous ne
+	devriez jamais faire ça si vous avez déjà rendu l'historique publique;
+	git n'est pas conçu pour que l'historique d'un projet change, et ne
+	peut pas effectuer correctement des merges répétés sur depuis branche
+	qui a vu son historique changer.
 
-#### Fixing a mistake with a new commit ####
+#### Réparer une erreur sur un nouveau commit ####
 
-Creating a new commit that reverts an earlier change is very easy;
-just pass the linkgit:git-revert[1] command a reference to the bad
-commit; for example, to revert the most recent commit:
+Il est facile de créer un nouveau commit qui annule les changements d'un
+commit précédent; utilisez la commande linkgit:git-revert[1] avec la référence
+du mauvais commit; par exemple, pour revenir au commit le plus récent:
 
     $ git revert HEAD
 
-This will create a new commit which undoes the change in HEAD.  You
-will be given a chance to edit the commit message for the new commit.
+Cela créera un nouveau commit qui annule les changements dans HEAD.
+Vous pourrez éditer le message de ce nouveau commit.
 
-You can also revert an earlier change, for example, the next-to-last:
+Vous pouvez aussi revenir sur des changements plus anciens, par
+exemple, sur l'avant-dernier changement:
 
     $ git revert HEAD^
 
-In this case git will attempt to undo the old change while leaving
-intact any changes made since then.  If more recent changes overlap
-with the changes to be reverted, then you will be asked to fix
-conflicts manually, just as in the case of resolving a merge.
+Dans ce cas, git essayera d'annuler l'ancien changement en gardant
+intactes les modifications faites depuis. Si plus d'un changement
+se superpose sur les changements à annuler, vous aurez à régler les
+conflits manuellement, de la même façon que quand vous réglez un merge.
 
-#### Fixing a mistake by modifying a commit ####
+#### Réparer une erreur en modifiant le commit ####
 
-If you have just committed something but realize you need to fix
-up that commit, recent versions of linkgit:git-commit[1] support an 
-**--amend** flag which instructs git to replace the HEAD commit
-with a new one, based on the current contents of the index.  This
-gives you an opportunity to add files that you forgot to add or
-correct typos in a commit message, prior to pushing the change
-out for the world to see.
+Si vous venez de committer quelque chose mais que vous vous rendez compte
+que vous devez réparer ce commit, les versions récentes de
+linkgit:git-commit[1] vous donnent accès à l'option **--amend** qui
+demande à git de remplacer le commit de HEAD par un autre, basé sur
+le contenu actuel de l'index. Cela vous donne l'opportunité d'ajouter
+de fichiers que vous avez oubliés ou de corriger des erreurs de typo
+dans le message du commit, avant de publier les changements pour les
+autre développeurs.
 
-If you find a mistake in an older commit, but still one that you
-have not yet published to the world, you use linkgit:git-rebase[1]
-in interactive mode, with "git rebase -i" marking the change
-that requires correction with **edit**.  This will allow you
-to amend the commit during the rebasing process.
+Si vous trouvez une erreur dans un ancien commit, mais que vous ne l'avez
+toujours pas publié, utilisez le mode interactif de linkgit:git-rebase[1],
+avec "git rebase -i" en marquant les changements qui doivent être corrigés
+avec **edit**. Cela vous permettra de modifier le commit pendant le
+processus de recombinaison.
