@@ -96,40 +96,42 @@ Si vous avec un serveur git qui fournit des dépôt de cette façon, il est
 important d'implémenter un hook de post-receive qui exécute la commande
 'git update-server-info' à chaque mise à jour pour éviter les confusions.
 
-### Fetching Data with Upload Pack ###
+### Récupération des Données avec Upload Pack ###
 
-For the smarter protocols, fetching objects is much more efficient.  A socket
-is opened, either over ssh or over port 9418 (in the case of the git:// protocol),
-and the linkgit:git-fetch-pack[1] command on the client begins communicating with
-a forked linkgit:git-upload-pack[1] process on the server.
+Pour les protocoles plus intelligents, la récupération d'objets est bien plus
+efficace. Un socket est ouvert, soit par ssh ou sur le port 9418 (dans ce cas
+avec le protocole git://), et la commande linkgit:git-fetch-pack[1] sur le
+client commence à communiquer avec un processus forké de la commande
+linkgit:git-upload-pack[1] sur le serveur.
 
-Then the server will tell the client which SHAs it has for each ref,
-and the client figures out what it needs and responds with a list of SHAs it
-wants and already has.
+Puis le serveur va dire au client quels SHAs il a pour chaque référence
+et le client devinera ce qu'il à besoin et lui répondra avec la liste
+des SHAs qu'il veut et de ceux qu'il a déjà.
 
-At this point, the server will generate a packfile with all the objects that 
-the client needs and begin streaming it down to the client.
+A ce moment, le serveur va générer un packfile avec tous les objets que le
+clients a besoin et va commencer à l'envoyer en stream au client.
 
-Let's look at an example.
+Regardons un exemple.
 
-The client connects and sends the request header. The clone command
+Le client se connecte et envoie l'entête de requête. La commande de clonage
 
 	$ git clone git://myserver.com/project.git
 
-produces the following request:
+produit la requête suivante:
 
 	0032git-upload-pack /project.git\\000host=myserver.com\\000
 
-The first four bytes contain the hex length of the line (including 4 byte line
-length and trailing newline if present). Following are the command and
-arguments. This is followed by a null byte and then the host information. The
-request is terminated by a null byte.
+Les 4 premiers bits contiennent la longueur hexadécimale de la ligne (en
+incluant ces 4 premiers bits et le retour-chariot s'il est présent).
+Ensuite viennent la commande et les arguments. Suivi par un bit nul puis
+les informations du host. La requête se termine par un bit nul.
 
-The request is processed and turned into a call to git-upload-pack:
+Sur le serveur, la requête est analysées et transformée en un appel
+à git-upload-pack:
 
  	$ git-upload-pack /path/to/repos/project.git
 
-This immediately returns information of the repo:
+Ceci retourne immédiatement les informations du dépôt:
 
 	007c74730d410fcb6603ace96f1dc55ea6196122532d HEAD\\000multi_ack thin-pack side-band side-band-64k ofs-delta shallow no-progress
 	003e7d1665144a3a975c05f1f43902ddaf084e784dbe refs/heads/debug
@@ -138,11 +140,11 @@ This immediately returns information of the repo:
 	003f74730d410fcb6603ace96f1dc55ea6196122532d refs/heads/master
 	0000
 
-Each line starts with a four byte line length declaration in hex. The section
-is terminated by a line length declaration of 0000.
+Chaque ligne commence par 4 bits représentant la longueur de la déclaration
+en hexadécimal. La section se termine par un déclaration de longueur de ligne
+de 0000.
 
-This is sent back to the client verbatim. The client responds with another
-request:
+Ceci est renvoyé comme-tel au client. Le client répond avec une autre requête:
 
 	0054want 74730d410fcb6603ace96f1dc55ea6196122532d multi_ack side-band-64k ofs-delta
 	0032want 7d1665144a3a975c05f1f43902ddaf084e784dbe
@@ -151,8 +153,8 @@ request:
 	0032want 74730d410fcb6603ace96f1dc55ea6196122532d
 	00000009done
 
-The is sent to the open git-upload-pack process which then streams out the 
-final response:
+C'est envoyé au processus git-upload-pack encore ouvert qui envoie ensuite
+en stream la réponse finale:
 
 	"0008NAK\n"
 	"0023\\002Counting objects: 2797, done.\n"
@@ -173,23 +175,22 @@ final response:
 	...
 	"<\\276\\255L\\273s\\005\\001w0006\\001[0000"
 	
-See the Packfile chapter previously for the actual format of the packfile data
-in the response.
+Voir le chapitre précédent sur le Packfile pour plus d'information sur le
+format de donnée du packfile présent dans la réponse.
 	
-### Pushing Data ###
+### Publier des Données ###
 
-Pushing data over the git and ssh protocols is similar, but simpler.  Basically
-what happens is the client requests a receive-pack instance, which is started
-up if the client has access, then the server returns all the ref head shas it
-has again and the client generates a packfile of everything the server needs
-(generally only if what is on the server is a direct ancestor of what it is
-pushing) and sends that packfile upstream, where the server either stores it
-on disk and builds an index for it, or unpacks it (if there aren't many objects
-in it)
+Publier des données sur les protocoles git et ssh est similaire mais plus
+simple. En gros, le client demande une instance de receive-pack, qui est lancé
+si le client y a accès, puis le serveur renvoie une nouvelle fois tous les SHAs
+de référence et le client génère un packfile pour tout ce dont le serveur a
+besoin (généralement seulement si ce qui se trouve sur le serveur est un
+ancêtre direct de ce qui doit être publié) et envoie ce packfile en stream vers
+le serveur, où le serveur peut le stocker sur le disque et construire son
+index, ou le déballer (unpack) s'il contient beaucoup d'objets.
 
-This entire process is accomplished through the linkgit:git-send-pack[1] command
-on the client, which is invoked by linkgit:git-push[1] and the 
-linkgit:git-receive-pack[1] command on the server side, which is invoked by 
-the ssh connect process or git daemon (if it's an open push server).
-
-
+L'intégralité de ce processus est réalisé par la commande
+linkgit:git-send-pack[1] sur le client, qui est appelée par linkgit:git-push[1]
+et la commande linkgit:git-receive-pack[1] du côté du serveur, qui est
+appelée par le processus de connexion ssh ou le daemon git (dans le cas
+d'un serveur ouvert à la publication).
