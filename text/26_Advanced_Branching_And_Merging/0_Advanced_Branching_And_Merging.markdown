@@ -1,10 +1,10 @@
-## Advanced Branching And Merging ##
+## Branches et Merges Avancés ##
 
-### Getting conflict-resolution help during a merge ###
+### Trouver de l'aide pour résoudre les conflits durant un merge ###
 
-All of the changes that git was able to merge automatically are
-already added to the index file, so linkgit:git-diff[1] shows only
-the conflicts.  It uses an unusual syntax:
+Tous les changements que git peut merger automatiquement sont déjà ajoutés
+à l'index, donc linkgit:git-diff[1] ne vous montre que les conflits.
+Il a une syntaxe peu commune:
 
     $ git diff
     diff --cc file.txt
@@ -18,34 +18,37 @@ the conflicts.  It uses an unusual syntax:
     + Goodbye
     ++>>>>>>> 77976da35a11db4580b80ae27e8d65caf5208086:file.txt
 
-Recall that the commit which will be committed after we resolve this
-conflict will have two parents instead of the usual one: one parent
-will be HEAD, the tip of the current branch; the other will be the
-tip of the other branch, which is stored temporarily in MERGE_HEAD.
+Souvenez-vous que le commit qui sera effectué après que nous ayons
+résolu ce conflit aura 2 parents: l'un sera le sommet de la branche courante
+(HEAD) et l'autre sera le sommet de la branche qui s'occupe du merge,
+stockée temporairement dans MERGE_HEAD.
 
-During the merge, the index holds three versions of each file.  Each of
-these three "file stages" represents a different version of the file:
+Durant le merge, l'index garde 3 versions de chaque fichiers. Une de ces 3
+"étape de fichier" représente une version différente du fichier:
 
-	$ git show :1:file.txt	# the file in a common ancestor of both branches
-	$ git show :2:file.txt	# the version from HEAD.
-	$ git show :3:file.txt	# the version from MERGE_HEAD.
+	$ git show :1:fichier.txt	# Le fichier dans l'ancêtre commun des 2 branches
+	$ git show :2:fichier.txt	# La version présente dans HEAD.
+	$ git show :3:fichier.txt	# La version présente dans MERGE_HEAD.
 
-When you ask linkgit:git-diff[1] to show the conflicts, it runs a
-three-way diff between the conflicted merge results in the work tree with
-stages 2 and 3 to show only hunks whose contents come from both sides,
-mixed (in other words, when a hunk's merge results come only from stage 2,
-that part is not conflicting and is not shown.  Same for stage 3).
+Quand vous demandez à linkgit:git-diff[1] de vous montrer les conflits, il fait
+une différence en 3 points entre les résultats conflictuels de merge dans le
+répertoire de travail avec les version 2 et 3 pour montrer seulement
+les morceaux de code qui ont du contenu de chaque côté, mélangés (en d'autres
+termes, quand un morceau du résultat du merge ne vient que de la version 2,
+alors ce morceau n'est pas en conflit est n'est pas affiché. Idem pour la
+version 3).
 
-The diff above shows the differences between the working-tree version of
-file.txt and the stage 2 and stage 3 versions.  So instead of preceding
-each line by a single "+" or "-", it now uses two columns: the first
-column is used for differences between the first parent and the working
-directory copy, and the second for differences between the second parent
-and the working directory copy.  (See the "COMBINED DIFF FORMAT" section
-of linkgit:git-diff-files[1] for a details of the format.)
+La différence en début de chapitre vous montre les différences entre la version
+de travail de fichier.txt et les versions 2 et 3. Donc au lieux de rajouter les
+préfixes "+" ou "-" devant chaque ligne, on utilise maintenant 2 colonnes pour
+ces préfixes: la première colonne est utilisée pour les différences entre le
+premier parent et la copie du répertoire de travail, et la deuxième pour les 
+différences entre le second parent et la copie du répertoire de travail.
+(Voir la section "COMBINED DIFF FORMAT" dans la documentation de
+linkgit:git-diff-files[1] pour plus de détails sur ce format.)
 
-After resolving the conflict in the obvious way (but before updating the
-index), the diff will look like:
+Après avoir résolu le conflit de manière évidente (mais avant de mettre à jour
+l'index), le diff ressemblera à:
 
     $ git diff
     diff --cc file.txt
@@ -57,35 +60,37 @@ index), the diff will look like:
     -Goodbye
     ++Goodbye world
 
-This shows that our resolved version deleted "Hello world" from the
-first parent, deleted "Goodbye" from the second parent, and added
-"Goodbye world", which was previously absent from both.
+Cela montre que notre version résolue a effacé "Hello world" du premier
+parent, et effacé "Goodbye" du second parent, puis ajouté "Goodbye world",
+qui était avant absent des 2.
 
-Some special diff options allow diffing the working directory against
-any of these stages:
+Quelques options spéciales de diff permettent de faire la différence entre
+le répertoire de travail et les différentes étapes:
 
-    $ git diff -1 file.txt		# diff against stage 1
-    $ git diff --base file.txt	# same as the above
-    $ git diff -2 file.txt		# diff against stage 2
-    $ git diff --ours file.txt	# same as the above
-    $ git diff -3 file.txt		# diff against stage 3
-    $ git diff --theirs file.txt	# same as the above.
+    $ git diff -1 file.txt			# différence avec l'étape 1
+    $ git diff --base file.txt		# même chose que ci-dessus
+    $ git diff -2 file.txt			# différence avec l'étape 2
+    $ git diff --ours file.txt		# même chose que ci-dessus
+    $ git diff -3 file.txt			# différence avec l'étape 3
+    $ git diff --theirs file.txt	# même chose que ci-dessus
 
-The linkgit:git-log[1] and linkgit:gitk[1] commands also provide special help
-for merges:
+Les commandes linkgit:git-log[1] and linkgit:gitk[1] fournissent aussi de
+l'aide particulière pour les merges:
 
     $ git log --merge
     $ gitk --merge
 
-These will display all commits which exist only on HEAD or on
-MERGE_HEAD, and which touch an unmerged file.
+Cela vous montrera tous les commits qui existent seulement des HEAD ou dans
+MERGE_HEAD, et qui concernant les fichiers non-mergés.
 
-You may also use linkgit:git-mergetool[1], which lets you merge the
-unmerged files using external tools such as emacs or kdiff3.
+Vous pouvez aussi utiliser linkgit:git-mergetool[1], qui vous permet de
+merger des fichiers non-mergés en utilisant des outils externes comme
+emacs ou kdiff3.
 
-Each time you resolve the conflicts in a file and update the index:
+Chaque fois que vous résolvez les conflits d'un fichier et que vous mettez
+à jour l'index:
 
-    $ git add file.txt
+    $ git add fichier.txt
 
-the different stages of that file will be "collapsed", after which
-git-diff will (by default) no longer show diffs for that file.
+les différentes étapes de se fichiers "s'effondreront", après quoi
+git-diff ne montrera plus (par défaut) de différence pour ce fichier.
