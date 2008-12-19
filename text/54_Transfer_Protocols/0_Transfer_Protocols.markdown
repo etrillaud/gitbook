@@ -1,41 +1,47 @@
-## Transfer Protocols ##
+## Les Protocoles de Transfert ##
 
-Here we will go over how clients and servers talk to each other to 
-transfer Git data around.
+Nous allons voir ici les communications qui ont lieu entre les client
+et les serveur pour permettre à Git de transférer des données.
 
-### Fetching Data over HTTP ###
+### Récupération des Données avec HTTP ###
 
-Fetching over an http/s URL will make Git use a slightly dumber protocol.
-In this case, all of the logic is entirely on the client side.  The server
-requires no special setup - any static webserver will work fine if the
-git directory you are fetching from is in the webserver path.
+Git utilise un protocole un peu plus fragile quand il récupère des données
+sur une adresse http/https. Dans ce cas, toute la logique se déroule du côté
+client. Le serveur ne requiert pas de configuration spéciale - n'importe
+quel serveur web statique fonctionnera si le dossier git que vous récupérez
+est dans un chemin accessible depuis le serveur web.
 
-In order for this to work, you do need to run a single command on the 
-server repo everytime anything is updated, though - linkgit:git-update-server-info[0],
-which updates the objects/info/packs and info/refs files to list which refs
-and packfiles are available, since you can't do a listing over http.  When
-that command is run, the objects/info/packs file looks something like this:
+Afin de faire fonctionner tout ça, vous devez lancer une simple commande sur
+le dépôt du serveur chaque fois que quelque chose est mis à jour.
+linkgit:git-update-server-info[0] met à jour les objects/info/packs et les
+fichiers d'info/refs pour afficher quelles références et packfiles sont
+disponibles, puisque vous ne pouvez pas faire une liste avec http.
+Quand cette commande est lancée, le fichier objects/info/packs ressemblera
+à quelque chose comme ça:
 
 	P pack-ce2bd34abc3d8ebc5922dc81b2e1f30bf17c10cc.pack
 	P pack-7ad5f5d05f5e20025898c95296fe4b9c861246d8.pack
 
-So that if the fetch can't find a loose file, it can try these packfiles.  The
-info/refs file will look something like this:
+Donc si la récupération (fetch) ne peut pas trouver un fichier seul, il peut
+essayer de le chercher dans ces packfiles. Le fichier info/refs ressemblera
+à quelque chose comme ça:
 
 	184063c9b594f8968d61a686b2f6052779551613	refs/heads/development
 	32aae7aef7a412d62192f710f2130302997ec883	refs/heads/master
 
-Then when you fetch from this repo, it will start with these refs and walk the
-commit objects until the client has all the objects that it needs. 
+Quand vous faite une récupération (fetch) sur ce dépôt, elle commencera par
+ces références et parcourera les objets commits jusqu'à que le client
+ait tous les objets qu'il a besoin.
 
-For instance, if you ask to fetch the master branch, it will see that master is
-pointing to <code>32aae7ae</code> and that your master is pointing to <code>ab04d88</code>,
-so you need <code>32aae7ae</code>.  You fetch that object 
+Par exemple, si vous demandez de récupérer la branche "master", il verra que
+"master" pointe sur <code>32aae7ae</code> et que votre master pointe sur
+<code>ab04d88</code>, donc vous aurez besoin de <code>32aae7ae</code>.
+Vous récupérez cet objet:
 
 	CONNECT http://myserver.com
 	GET /git/myproject.git/objects/32/aae7aef7a412d62192f710f2130302997ec883 - 200
 	
-and it looks like this:
+et il ressemble à ça:
 
 	tree aa176fb83a47d00386be237b450fb9dfb5be251a
 	parent bd71cad2d597d0f1827d4a3f67bb96a646f02889
@@ -44,29 +50,29 @@ and it looks like this:
 
 	added chapters on private repo setup, scm migration, raw git
 
-So now it fetches the tree <code>aa176fb8</code>:
+donc maintenant il récupère le "tree" <code>aa176fb8</code>:
 
 	GET /git/myproject.git/objects/aa/176fb83a47d00386be237b450fb9dfb5be251a - 200
 
-which looks like this:
+qui ressemble à ça:
 
 	100644 blob 6ff87c4664981e4397625791c8ea3bbb5f2279a3	COPYING
 	100644 blob 97b51a6d3685b093cfb345c9e79516e5099a13fb	README
 	100644 blob 9d1b23b8660817e4a74006f15fae86e2a508c573	Rakefile
 
-So then it fetches those objects:
+donc il récupère ces objets:
 
 	GET /git/myproject.git/objects/6f/f87c4664981e4397625791c8ea3bbb5f2279a3 - 200
 	GET /git/myproject.git/objects/97/b51a6d3685b093cfb345c9e79516e5099a13fb - 200
 	GET /git/myproject.git/objects/9d/1b23b8660817e4a74006f15fae86e2a508c573 - 200
 
-It actually does this with Curl, and can open up multiple parallel threads to 
-speed up this process.  When it's done recursing the tree pointed to by the 
-commit, it fetches the next parent.
+Curl est utilisé pour cette opération, et plusieurs thread parallèles sont
+ouverts pour accélerer ce processus. Quand il a terminé d'examiner le tree
+pointé par le commit, il récupère le prochain parent:
 	
 	GET /git/myproject.git/objects/bd/71cad2d597d0f1827d4a3f67bb96a646f02889 - 200
 
-Now in this case, the commit that comes back looks like this:
+Maintenant dans ce cas, le commit qui revient ressemble à ça:
 
 	tree b4cc00cf8546edd4fcf29defc3aec14de53e6cf8
 	parent ab04d884140f7b0cf8bbf86d6883869f16a46f65
@@ -74,19 +80,21 @@ Now in this case, the commit that comes back looks like this:
 	committer Scott Chacon <schacon@gmail.com> 1220421161 -0700
 
 	added chapters on the packfile and how git stores objects
-	
-and we can see that the parent, <code>ab04d88</code> is where our master branch
-is currently pointing.  So, we recursively fetch this tree and then stop, since
-we know we have everything before this point.  You can force Git to double check
-that we have everything with the '--recover' option.  See linkgit:git-http-fetch[1]
-for more information.
 
-If one of the loose object fetches fails, Git will download the packfile indexes
-looking for the sha that it needs, then download that packfile. 
+et vous pouvez voir que le parent, <code>ab04d88</code>, est là où pointe la
+branche courante. Donc, nous avec récupérer récursivement ce tree puis arrêter
+puis que nous avons récupérer tout ce qui nous manquait jusqu'à ce point. Vous
+pouvez forcer Git à verifier par deux fois que nous avons tout ce qu'il nous
+avec l'option '--recover'. Voir linkgit:git-http-fetch[1] pour plus
+d'informations.
 
-It is important if you are running a git server that serves repos this way to
-implement a post-receive hook that runs the 'git update-server-info' command
-each time or there will be confusion.	
+Si la récupération de l'un des objet seul échoue, Git téléchargement
+automatiquement les index des packfiles pour retrouver le sha nécessaire,
+puis téléchargera ce packfile.
+
+Si vous avec un serveur git qui fournit des dépôt de cette façon, il est
+important d'implémenter un hook de post-receive qui exécute la commande
+'git update-server-info' à chaque mise à jour pour éviter les confusions.
 
 ### Fetching Data with Upload Pack ###
 
