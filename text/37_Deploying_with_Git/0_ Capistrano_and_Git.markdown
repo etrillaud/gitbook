@@ -1,6 +1,6 @@
-## Deploying with Git ##
+## Déployer avec Git ##
 
-### Capistrano and Git ###
+### Capistrano et Git ###
 
 [GitHub Guide on Deploying with Cap](http://github.com/guides/deploying-with-capistrano)
 
