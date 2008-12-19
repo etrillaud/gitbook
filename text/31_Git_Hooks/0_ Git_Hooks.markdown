@@ -2,19 +2,20 @@
 
 [Git Hooks](http://www.kernel.org/pub/software/scm/git/docs/githooks.html)
 
-### Server Side Hooks ###
+### Hooks Côté Serveur ###
 
-#### Post Receive ####
+#### Reception de Post ####
 
 
 	GIT_DIR/hooks/post-receive
 
-If you wrote it in Ruby, you might get the args this way:
+Si vous écrivez ceci en Ruby, vous pourrez obtenir les arguments de cette
+manière:
 
 	ruby
 	rev_old, rev_new, ref = STDIN.read.split(" ")
 
-Or in a bash script, something like this would work:
+Ou en script bash, quelque chose comme ça peut fonctionner:
 	
 	#!/bin/sh
 	# <oldrev> <newrev> <refname>
@@ -30,22 +31,23 @@ Or in a bash script, something like this would work:
 	done
 	
 
-### Client Side Hooks ###
+### Hooks Côté Client ###
 
 
 #### Pre Commit ####
 
-Running your tests automatically before you commit
+Lancer vos tests automatiquement avant de committer
 
  	GIT_DIR/hooks/pre-commit
 
-Here is an example of a Ruby script that runs RSpec tests before allowing a commit.
+Voici un exemple d'un script Ruby qui exécute des tests RSpec avant de vous
+permettre de faire un commit.
 
 	ruby  
 	html_path = "spec_results.html"  
-	`spec -f h:#{html_path} -f p spec` # run the spec. send progress to screen. save html results to html_path  
+	`spec -f h:#{html_path} -f p spec` # lancer rspec, affichier la prograssion, sauvegarde le resultat html dans html_path
 
-	# find out how many errors were found  
+	# affiche combien d'erreurs ont été trouvées
 	html = open(html_path).read  
 	examples = html.match(/(\d+) examples/)[0].to_i rescue 0  
 	failures = html.match(/(\d+) failures/)[0].to_i rescue 0  
