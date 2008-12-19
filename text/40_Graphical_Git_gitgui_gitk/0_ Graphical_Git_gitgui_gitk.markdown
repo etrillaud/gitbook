@@ -1,26 +1,27 @@
-## Graphical Git ##
+## Git en Mode Graphique ##
 
-Git has a couple of fairly popular Graphial User Interfaces that can
-read and/or maniplulate Git repositories. 
+Git possède quelques interfaces graphiques assez populaires. Elles
+permettent de lire et/ou manipuler des dépôt Git.
 
-### Bundled GUIs ###
+### Les Interfaces Fournies ###
 
-Git comes with two major GUI programs written in Tcl/Tk.  Gitk is a 
-repository browser and commit history visualization tool.
+Git est fourni avec 2 programmes graphiques écrits en Tcl/Tk.
+Gitk est un navigateur de dépôt et un visualiseur d'historique de commits.
 
 [gitk](http://www.kernel.org/pub/software/scm/git/docs/gitk.html)
 
-linkgit:git-gui[1] is a tool that helps you visualize the index operations,
-like add, remove and commit.  It won't do everything you can do on the 
-command line, but for many of the basic operations, it's pretty good.
+linkgit:git-gui[1] est un outil qui vous aidera à visualiser les opérations
+sur l'index, comme les ajouts, les retraits et les commits. Il ne permet
+pas faire toutes les opérations disponibles avec la ligne de commande, mais
+pour les opérations les plus basiques, c'est un très bon outil.
 
 [git gui](http://www.kernel.org/pub/software/scm/git/docs/git-gui.html)
  
-### Third Party Projects ###
+### Projets Tiers ###
 
-For Mac users, there are
-[GitX](http://gitx.frim.nl/) and [GitNub](http://github.com/Caged/gitnub/wikis)
+Pour les utilisateurs de Mac, vous trouverez
+[GitX](http://gitx.frim.nl/) et [GitNub](http://github.com/Caged/gitnub/wikis)
 
-For Linux or other Qt users, there is
+Pour Linux et les autres utilisateurs de Qt, il y a
 [QGit](http://digilander.libero.it/mcostalba/)
 
