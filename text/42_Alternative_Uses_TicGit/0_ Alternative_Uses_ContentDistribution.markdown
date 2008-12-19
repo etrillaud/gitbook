@@ -1,4 +1,4 @@
-## Alternative Uses ##
+## Usages Alternatifs ##
 
 ContentDistribution
 
