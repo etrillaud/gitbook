@@ -1,9 +1,9 @@
-## Finding Issues - Git Blame ##
+## Trouver les Problèmes - Git Blame ##
 
-The linkto:git-blame[1] command is really helpful for figuring out who changed
-which sections of a file.  If you simple run 'git blame [filename]' you'll get
-an output of the entire file with the last commit sha, date and author for every
-line in the file.
+La commande linkto:git-blame[1] est vraiment utile pour savoir qui a modifié
+quelle partie du fichier. Si vus lancez simplement 'git blame [nom_du_fichier]'
+vous obtiendrez une liste du dernier sha du commit, de la date et de
+l'auteur de chaque ligne du fichier.
 
 	$ git blame sha1_file.c
 	...
@@ -19,10 +19,11 @@ line in the file.
 	70f5d5d3 (Nicolas Pitre   2008-02-28 00:25:19 -0500   17) #include "pack-revindex.h"628522ec (Junio C Hamano              2007-12-29 02:05:47 -0800   18) #include "sha1-lookup.h"
 	...
 	
-This is often helpful if a file had a line reverted or a mistake that broke 
-the build to help you see who changed that line last.  
+C'est souvent utile pour voir qui a crée une erreur si le fichier revient sur
+une ligne ou qu'une erreur casse la compilation. 
 
-You can also specify a start and end line for the blame:
+Vous pouvez aussi sélectionner le numéro des ligne de début et de fin de
+la partie de fichier à analyser:
 
 	$>git blame -L 160,+10 sha1_file.c 
 	ace1534d (Junio C Hamano 2005-05-07 00:38:04 -0700       160)}
