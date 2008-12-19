@@ -46,7 +46,7 @@ importantes:
 	Nous avons vu dans <<conflict-resolution>> que durant le merge, l'index
 	peut stocker de multiples version d'un même fichier (appelés "stages").
 	La troisième colonne dans la sortie de linkgit:git-ls-files[1] ci-dessus
-	est le numéro du "stage", et prendra une valeut autre que 0 pour les
+	est le numéro du "stage", et prendra une valeur autre que 0 pour les
 	fichiers avec des conflits de merge.
 
 L'index est donc un sorte de zone d'assemblage temporaire, qui contient
