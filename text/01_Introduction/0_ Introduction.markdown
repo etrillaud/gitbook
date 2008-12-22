@@ -54,12 +54,8 @@ Ce livre est en grande partie tiré de différentes sources mixées et
 remises ensemble. Si vous voulez découvrir quelques uns des articles
 originaux, vous pouvez aller les voir et remercier leurs auteurs:
 
-* [Git User
-* Manual](http://www.kernel.org/pub/software/scm/git/docs/user-manual.html)
-* [The Git
-* Tutorial](http://www.kernel.org/pub/software/scm/git/docs/gittutorial.html)
-* [The Git Tutorial pt
-* 2](http://www.kernel.org/pub/software/scm/git/docs/gittutorial-2.html)
-* ["My Git Workflow" blog
-* post](http://osteele.com/archives/2008/05/my-git-workflow)
+* [Git User Manual](http://www.kernel.org/pub/software/scm/git/docs/user-manual.html)
+* [The Git Tutorial](http://www.kernel.org/pub/software/scm/git/docs/gittutorial.html)
+* [The Git Tutorial pt 2](http://www.kernel.org/pub/software/scm/git/docs/gittutorial-2.html)
+* ["My Git Workflow" blog post](http://osteele.com/archives/2008/05/my-git-workflow)
 
