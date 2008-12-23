@@ -1,8 +1,8 @@
 ### Mac 10.5 ###
 
-Avec Leopard, vous pouvez installer Git via MacPorts, mais vus avez une
-autre option qui vous permet d'installer Git avec une interface
-d'installation. Vous pouvez télécharger cette interface ici:
+Avec Leopard, vous pouvez installer Git via MacPorts, mais vous avez une
+autre option qui permet d'installer Git avec une interface
+d'installation. Celle-ci est téléchargeable à cette adresse:
 [Git OSX Installer](http://code.google.com/p/git-osx-installer/downloads/list?can=3)
 
 Si vous préférez installer Git depuis le code source, ces articles peuvent vous aider:

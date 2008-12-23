@@ -1,6 +1,6 @@
 ### Windows ###
 
-Sur Windows, il est assz simple d'installe Git. Téléchargez et installez
+Sur Windows, il est assez simple d'installer Git. Téléchargez et installez
 simplement le paquet [msysGit](http://code.google.com/p/msysgit/downloads/list).
 
 Allez au chapitre *Git sur Windows* pour regarder un screencast qui vous fera
