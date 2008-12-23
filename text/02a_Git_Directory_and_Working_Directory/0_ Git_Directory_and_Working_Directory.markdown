@@ -33,5 +33,5 @@ Le 'répertoire de travail' de Git est le répertoire qui contient la version
 courante des fichiers sur lesquels vous travaillez. Les fichiers de ce répertoire
 sont souvent effacés ou remplacés par Git quand vous changez de branche - c'est
 tout à fait normal. Tout votre historique est stocké dans votre répertoire Git;
-le répertoire de travail est simplement une version temporaire de votre projet où
-vous modifier les fichiers jusqu'à votre prochain commit.
+le répertoire de travail est simplement une version temporaire de votre projet 
+dans lequel vous modifiez les fichiers jusqu'à votre prochain commit.
