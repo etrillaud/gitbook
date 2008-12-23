@@ -26,5 +26,5 @@ utilisant linkgit:git-cat-file[1]:
 Voyez la commande linkgit:git-tag[1] pour apprendre comment créer et
 vérifier les objets "tags". (Notez que linkgit:git-tag[1] peut aussi être
 utilisé pour créer des "tags légers", qui ne sont pas du tout des objets
-"tags", mais juste des simples références dont le nom commence par
+"tags", mais juste de simples références dont le nom commence par
 "refs/tags/").

@@ -50,7 +50,7 @@ détails. Si nous avons le SHA1 d'un tree, nous pouvons le détailler comme ceci
 
 Comme vous pouvez le voir, un objet tree contient une liste d'entrées,
 chacune avec un mode, un type d'objet, un nom SHA1, un nom, le tout trié
-avec le nom. L'objet tree représente le contenu d'un unique dossier.
+à partir des noms. L'objet tree représente le contenu d'un unique dossier.
 
 Un objet référencé par un tree peut être un blog, représentant le contenu
 d'un fichier, ou un autre tree, représentant le contenu d'un sous-répertoire.
