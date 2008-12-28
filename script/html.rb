@@ -4,6 +4,7 @@ require 'rubygems'
 require 'builder'
 require 'rdiscount'
 require "uv"
+require 'uri'
 
 #MIN_SIZE = 1200
 MIN_SIZE = 800
@@ -51,14 +52,27 @@ end
 desc 'Create the HTML version'
 task :html => :merge do
   
-  if File.exists?('output/full_book.markdown')
-    output = File.new('output/full_book.markdown').read
+  lang = ENV['lang']
+  full_book = "output/full_book.markdown"
+  full_book = "output/full_book_#{lang}.markdown" if lang
+  
+  pdf_book = "output/book.pdf"
+  pdf_book = "output/book_#{lang}.pdf" if lang
+  
+  index = "output/index.html"
+  index = "output/index_#{lang}.html" if lang
+  
+  html_dir = "output/book"
+  html_dir = "output/book/#{lang}" if lang
+  
+  if File.exists?(full_book)
+    output = File.new(full_book).read
     output = RDiscount.new(output).to_html
 
     ## pdf version ##
     
     # code highlighting
-    File.open('output/index.html', 'w') do |f|
+    File.open(index, 'w') do |f|
       body = do_replacements(output, :pdf)
 
       html_template = File.new("layout/pdf_template.html").read
@@ -69,10 +83,8 @@ task :html => :merge do
     end
     
     ## html version ##
-    
-    html_dir = 'output/book'
     FileUtils.rm_r(html_dir) rescue nil
-    Dir.mkdir(html_dir)
+    FileUtils.mkdir_p(html_dir)
     
     # html chapters
     links = []
@@ -96,7 +108,10 @@ task :html => :merge do
         next if !chapter
         # extract chapter title
         puts "\t" + chtitle.strip
-        filename = count.to_s + '_' + chtitle.strip.downcase.gsub(' ', '_') + '.html'
+        
+        file_title = URI.escape(chtitle.strip.downcase.gsub(' ', '_'), Regexp.new("[^#{URI::PATTERN::UNRESERVED}]"))
+        
+        filename = count.to_s + '_' + file_title + '.html'
         body = "<h2>#{chtitle}</h2>" + chapter
         body = do_replacements(body, :html)
         chlinks << [chtitle.strip, filename, body.size]
@@ -133,7 +148,7 @@ task :html => :merge do
             section_array.each do |chapter_title, chapter_file, chsize|
               toc.tr { toc.td {
                 (chsize > MIN_SIZE) ? extra = 'done' : extra = 'todo'
-                toc.a(:href => chapter_file, :class => "chapter-link #{extra}") << chapter_title
+                toc.a(:href => URI.escape(chapter_file, Regexp.new("[^#{URI::PATTERN::UNRESERVED}]")), :class => "chapter-link #{extra}") << chapter_title
               }}
             end
           end
@@ -146,22 +161,21 @@ task :html => :merge do
             section_array.each do |chapter_title, chapter_file, chsize|
               toc.tr { toc.td {
                 (chsize > MIN_SIZE) ? extra = 'done' : extra = 'todo'
-                toc.a(:href => chapter_file, :class => "chapter-link #{extra}") << chapter_title
+                toc.a(:href =>  URI.escape(chapter_file, Regexp.new("[^#{URI::PATTERN::UNRESERVED}]")), :class => "chapter-link #{extra}") << chapter_title
               }}
             end
           end
         end
       }
     }}    
-    File.open('output/book/index.html', 'w') do |f|
+    File.open("#{html_dir}/index.html", 'w') do |f|
       html_template = File.new("layout/book_index_template.html").read
       html_template.gsub!("#body", toc.to_s)
       f.puts html_template
     end
     
-    `cp -Rf assets output/book/`
-    `cp output/book.pdf output/book/`
-    
+    `cp -Rf assets #{html_dir}`
+    `cp #{pdf_book} #{html_dir}` if File.exists?(pdf_book)
   end
 end
 
