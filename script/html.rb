@@ -53,6 +53,22 @@ desc 'Create the HTML version'
 task :html => :merge do
   
   lang = ENV['lang']
+  
+  #
+  # Layout
+  #
+  index_layout = "layout/book_index_template.html"
+  index_layout = "layout/#{lang}/book_index_template.html" if lang
+  
+  chapter_layout = "layout/chapter_template.html"
+  chapter_layout = "layout/#{lang}/chapter_template.html" if lang
+  
+  pdf_layout = "layout/pdf_template.html"
+  pdf_layout = "layout/#{lang}/pdf_template.html" if lang
+  
+  #
+  # Output
+  #
   full_book = "output/full_book.markdown"
   full_book = "output/full_book_#{lang}.markdown" if lang
   
@@ -75,7 +91,7 @@ task :html => :merge do
     File.open(index, 'w') do |f|
       body = do_replacements(output, :pdf)
 
-      html_template = File.new("layout/pdf_template.html").read
+      html_template = File.new(pdf_layout).read
       html_template.gsub!("#body", body)
 
       
@@ -131,7 +147,7 @@ task :html => :merge do
         if cf = chapter_files[index + 1]
           nav += " <a href=\"#{cf[1]}\">Next</a>"
         end
-        html_template = File.new("layout/chapter_template.html").read
+        html_template = File.new(chapter_layout).read
         html_template.gsub!("#title", chapter_title)
         html_template.gsub!("#body", body)
         html_template.gsub!("#nav", nav)
@@ -169,7 +185,7 @@ task :html => :merge do
       }
     }}    
     File.open("#{html_dir}/index.html", 'w') do |f|
-      html_template = File.new("layout/book_index_template.html").read
+      html_template = File.new(index_layout).read
       html_template.gsub!("#body", toc.to_s)
       f.puts html_template
     end
