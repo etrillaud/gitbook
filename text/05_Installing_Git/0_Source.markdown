@@ -8,7 +8,7 @@ dérouler l'installation de cette façon:
     $ make prefix=/usr install ;# avec l'utilisateur root
 
 Vous aurez besoin des librairies [expat][], [curl][], [zlib][], et [openssl][]
-installées - normalement, à part *expat*, ces librairies devraient déjà
+déjà installées; normalement, à part *expat*, ces librairies devraient déjà
 se trouver sur votre système.
 
 [Page de Téléchargement de Git]:  http://git-scm.com/download
