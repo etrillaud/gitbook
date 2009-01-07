@@ -1,9 +1,9 @@
 ## Obtenir un Dépôt Git ##
 
 Maintenant que nous avons tout configuré, nous avons besoin d'un dépôt Git.
-Nous pouvons faire ça de 2 manière - soit *clonant* un dépôt qui
-existe déjà, soit en *initialisant*  un dépôt depuis un dossier vide ou 
-depuis des fichiers existant qui ne sont pas encore sous contrôle de version.
+Nous pouvons faire ça de 2 manière - soit en *clonant* un dépôt qui
+existe déjà, soit en *initialisant* un dépôt depuis un dossier vide ou 
+depuis des fichiers existants qui ne sont pas encore sous contrôle de version.
 
 ### Cloner un Dépôt ###
 
@@ -21,7 +21,7 @@ ou par http:
     git clone http://www.kernel.org/pub/scm/git/git.git
 
 Le protocole git:// est plus rapide et plus efficace, mais il est parfois
-nécessaire d'utiliser http derrière un firewall d'entreprise par exemple.
+nécessaire d'utiliser http (derrière un firewall d'entreprise par exemple).
 Dans tous les cas, vous devriez maintenant avoir un répertoire nommé 'git'
 qui contient tout le code source de Git et son historique - c'est
 simplement une copie de ce qui se trouvait sur le serveur.
@@ -35,7 +35,7 @@ nouveau répertoire nommé 'linux-2.6' pour y cloner le code).
 ### Initialiser un Nouveau Dépôt ###
 
 Imaginons que nous avons une archive nommée project.tar.gz avec notre
-travail initial. Nous pouvons le placé sous le contrôle de version de Git
+travail initial. Nous pouvons le placer sous le contrôle de version de Git
 comme ceci:
 
     $ tar xzf project.tar.gz
@@ -46,7 +46,7 @@ Git vous répondra:
 
     Initialized empty Git repository in .git/
 
-Vus avez maintenant initialisé le répertoire de travail--vous pourrez
+Vous avez maintenant initialisé le répertoire de travail et vous pourrez
 y trouver un nouveau répertoire à l'intérieur, nommé ".git".
 
 [gitcast:c1_init](GitCast #1 - setup, init and cloning)

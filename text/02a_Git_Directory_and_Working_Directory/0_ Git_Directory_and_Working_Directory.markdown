@@ -3,7 +3,7 @@
 ### Le Répertoire Git ###
 
 Le 'répertoire git' est un répertoire qui contient tout l'historique de Git
-et les méta-informations du projet - avec tous les objets (commits, tree,
+et les méta-informations du projet: tous les objets (commits, tree,
 blobs, tags), tous les pointeurs vers les différentes branches et plus
 encore.
 
@@ -31,7 +31,7 @@ l'instant)
 
 Le 'répertoire de travail' de Git est le répertoire qui contient la version
 courante des fichiers sur lesquels vous travaillez. Les fichiers de ce répertoire
-sont souvent effacés ou remplacés par Git quand vous changez de branche - c'est
+sont souvent effacés ou remplacés par Git quand vous changez de branche, ce qui est 
 tout à fait normal. Tout votre historique est stocké dans votre répertoire Git;
 le répertoire de travail est simplement une version temporaire de votre projet 
 dans lequel vous modifiez les fichiers jusqu'à votre prochain commit.

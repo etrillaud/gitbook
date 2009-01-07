@@ -1,7 +1,7 @@
 ## Analyser l'Historique - Git Log ##
 
 La commande linkgit:git-log[1] vous montrera des listes de commits.
-Tout seul, elle vous montrera les commits visible depuis le commit
+Toute seule, elle vous montrera les commits visible depuis le commit
 parent de votre version courante; mais vous pouvez faire des
 requêtes plus spécifiques:
 
@@ -9,9 +9,9 @@ requêtes plus spécifiques:
     $ git log test..master	# commits visibles depuis master mais pas test
     $ git log master..test	# commits visibles depuis test mais pas master
     $ git log master...test	# commits visibles pour test ou
-    			            #    master, mais pas les 2
+    			            #    master, mais pas pour les 2
     $ git log --since="2 weeks ago" # commits des 2 dernières semaines
-    $ git log Makefile      # commits qui modifient le Makefile
+    $ git log Makefile      # commits modifiant le Makefile
     $ git log fs/		    # commits qui modifient les fichiers sous fs/
     $ git log -S'foo()'	    # commits qui ajoutent ou effacent des données
     			            #    contenant la chaîne 'foo()'
@@ -67,7 +67,7 @@ Vous pouvez aussi demander à git de vous montrer les patches:
 
 Vous pouvez rajouter l'options <code>--stat</code> à 'git log' pour
 obtenir la liste des fichiers qui ont été changés dans un commit
-et afficher combien de lignes ont été rajouté ou retiré de chaque
+et afficher combien de lignes ont été rajoutées ou retirées de chaque
 fichier.
 
 	$ git log --stat
