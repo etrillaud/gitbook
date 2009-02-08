@@ -18,12 +18,12 @@ que vous avez créé depuis votre dernière publication (ou le dernier
 merge depuis le dépôt d'origine).
 
 Pour voir quels commits seront concernés, vous pouvez utiliser la
-commande 'log' de cette façon:
+commande 'log' de cette façon :
 	
 	$ git log github/master..
 
 Quand vous lancerez la commande 'rebase -i', vous vous trouverez dans
-un éditeur qui ressemblera à ça:
+un éditeur qui ressemblera à ça :
 
 	pick fc62e55 added file_size
 	pick 9824bf4 fixed little thing
@@ -43,7 +43,7 @@ un éditeur qui ressemblera à ça:
 	#
 
 Cela signifie qu'il y a 5 commits depuis votre dernière publication et
-chaque commit est décrit par un ligne avec le format suivant:
+chaque commit est décrit par un ligne avec le format suivant :
 
 	(action) (sha partiel) (court message du commit)
 	
@@ -60,7 +60,7 @@ de sauvegarder le commit avec le même message qu'avant.
 Si 'squash' est sélectionné, il combinera ce commit avec le précédent pour
 former un nouveau commit. Vous trouverez alors un autre éditeur pour merger
 les messages des 2 commit qui ont étés assemblés ensemble. Donc, si vous
-sortez du premier éditeur de la manière suivante:
+sortez du premier éditeur de la manière suivante :
 
 	pick   fc62e55 added file_size
 	squash 9824bf4 fixed little thing
@@ -68,7 +68,7 @@ sortez du premier éditeur de la manière suivante:
 	squash 76b9da6 added the apply command
 	squash c264051 Revert "added file_size" - not implemented correctly
 
-vous devrez créer un nouveau message de commit `partir de ça:
+vous devrez créer un nouveau message de commit à partir de ça :
 
 	# This is a combination of 5 commits.
 	# The first commit's message is:
@@ -95,12 +95,12 @@ vous devrez créer un nouveau message de commit `partir de ça:
 Une fois que vous aurez édité cette partie en un seul message et quitté
 l'éditeur, le commit sera sauvegardé avec votre nouveau message.
 
-Si vous avec sélectionné 'edit', la même chose se passera, mais un pause
+Si vous avec sélectionné 'edit', la même chose se passera, mais une pause
 sera marqué entre chaque commit pour vous donner la main avec une ligne de
 commande afin que vous puissiez modifier le commit, ou son contenu.
 
 Par exemple, si vous voulez découper un commit, vous sélectionnerez 'edit'
-pour ce commit:
+pour ce commit :
 
 	pick   fc62e55 added file_size
 	pick   9824bf4 fixed little thing
@@ -108,11 +108,11 @@ pour ce commit:
 	pick   76b9da6 added the apply command
 	pick   c264051 Revert "added file_size" - not implemented correctly
 
-RY quand vous vous trouverez avec la ligne de commande, vous pourrez revenir
+Et quand vous vous trouverez avec la ligne de commande, vous pourrez revenir
 sur ce commit pour en créer deux (ou plus) nouveaux. Disons que 21d80a5
 modifie 2 fichiers, fichier1 et fichier2, et que vous voulez le découper en
 2 commits séparés. Vous pouvez faire ceci quand la recombinaison vous
-redonne la main avec la ligne de commande:
+redonne la main avec la ligne de commande :
 
 	$ git reset HEAD^
 	$ git add fichier1
@@ -123,7 +123,7 @@ redonne la main avec la ligne de commande:
 	
 Et maintenant, au lieu d'avoir 5 commits, vous en avez 6.
 
-La recombinaison interactive peut vous aider sur un dernier point utilise,
+La recombinaison interactive peut vous aider sur un dernier point :
 elle peut oublier des commits. Si au lieu de sélectionner 'pick', 'squash'
 ou 'edit' pour la ligne de commit, vous effacez simplement la ligne, alors
 le commit sera retiré de l'historique.

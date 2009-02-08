@@ -6,7 +6,7 @@ Un "blob" stocke généralement le contenu d'un fichier.
 
 Vous pouvez utiliser linkgit:git-show[1] pour examiner le contenu de
 n'importe quel blob. Si nous avons le SHA1 d'un blob, nous pouvons l'examiner
-comme ceci:
+comme ceci :
 
     $ git show 6ff87c4664
 
@@ -15,7 +15,7 @@ comme ceci:
      v2.2 or v3.x or whatever), unless explicitly otherwise stated.
     ...
 
-Un "blog" n'est rien de plus qu'un morceau de données binaires. Il ne fait
+Un "blob" n'est rien de plus qu'un morceau de données binaires. Il ne fait
 référence à rien, et n'a aucun attribut, même pas un nom de fichier.
 
 Puisque le blob est entièrement défini par ses données, si 2 fichiers dans
@@ -35,7 +35,7 @@ répertoire ou sous-répertoire.
 
 La commande polyvalente linkgit:git-show[1] peut aussi Être utilisée pour
 examiner un objet "tree", mais linkgit:git-ls-tree[1] vous donnera plus de
-détails. Si nous avons le SHA1 d'un tree, nous pouvons le détailler comme ceci:
+détails. Si nous avons le SHA1 d'un tree, nous pouvons le détailler comme ceci :
 
     $ git ls-tree fb3a8bdd0ce
     100644 blob 63c918c667fa005ff12ad89437f2fdc80926e21c    .gitignore
@@ -52,7 +52,7 @@ Comme vous pouvez le voir, un objet tree contient une liste d'entrées,
 chacune avec un mode, un type d'objet, un nom SHA1, un nom, le tout trié
 à partir des noms. L'objet tree représente le contenu d'un unique dossier.
 
-Un objet référencé par un tree peut être un blog, représentant le contenu
+Un objet référencé par un tree peut être un blob, représentant le contenu
 d'un fichier, ou un autre tree, représentant le contenu d'un sous-répertoire.
 Puisque les trees et les blobs, comme les autres objets, sont nommés par le
 hash SHA1 de leur contenu, 2 trees ont le même nom SHA1 si, et seulement si,
@@ -61,7 +61,7 @@ sous-répertoires) est identique. Cela permet à git de déterminer rapidement
 les différences entre 2 objets trees associés, puisqu'il peut ignorer les
 entrées avec le même nom d'objet.
 
-(Note: en présence de sous-modules, les trees peuvent aussi contenir des
+(Note : en présence de sous-modules, les trees peuvent aussi contenir des
 commits comme entrées. Voir la section **Sous-Modules**.)
 
 Notez que tous les fichiers ont le mode 644 ou 755: git ne tient compte que

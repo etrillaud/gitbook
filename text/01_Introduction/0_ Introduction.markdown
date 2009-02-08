@@ -52,7 +52,7 @@ et m'envoyer un patch ou un pull-request.
 
 Ce livre est en grande partie tiré de différentes sources mixées et
 remises ensemble. Si vous voulez découvrir quelques uns des articles
-originaux, vous pouvez aller les voir et remercier leurs auteurs:
+originaux, vous pouvez aller les voir et remercier leurs auteurs :
 
 * [Git User Manual](http://www.kernel.org/pub/software/scm/git/docs/user-manual.html)
 * [The Git Tutorial](http://www.kernel.org/pub/software/scm/git/docs/gittutorial.html)

@@ -3,7 +3,7 @@
 ### Le Répertoire Git ###
 
 Le 'répertoire git' est un répertoire qui contient tout l'historique de Git
-et les méta-informations du projet: tous les objets (commits, tree,
+et les méta-informations du projet : tous les objets (commits, tree,
 blobs, tags), tous les pointeurs vers les différentes branches et plus
 encore.
 
@@ -11,7 +11,7 @@ Il y a un seul répertoire Git par projet (au contraire de système comme SVN
 ou CVS qui contient ce répertoire dans chaque sous-répertoire du projet),
 ce dossier se nomme '.git' (par défaut, il peut être nommé différemment), et
 ce dossier se situe à la racine de votre projet. Si vous regardez le contenu
-de ce répertoire, vous pouvez y trouver tous vos fichiers important:
+de ce répertoire, vous pouvez y trouver tous vos fichiers important :
 
     $>tree -L 1
     .

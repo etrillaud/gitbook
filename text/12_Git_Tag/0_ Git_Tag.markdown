@@ -8,24 +8,24 @@ linkgit:git-tag[1] en spécifiant le nom du tag et le nom SHA1 du commit
 
     $ git tag stable-1 1b2e1d63ff
 
-Après ça, nous pouvons utilisé stable-1 pou faire référence au commit 1b2e1d63ff.
+Après ça, nous pouvons utilisé stable-1 pour faire référence au commit 1b2e1d63ff.
 
 Ceci est un "tag léger", car aucune branche n'a été créée durant le processus.
 Si vous voulez aussi rajouter un commentaire à ce tag, et le signer
-avec un méthode cryptographique, alors nous allons plutôt créé un *objet tag*.
+avec un méthode cryptographique, alors nous allons plutôt créer un *objet tag*.
 
 ### Les Objets Tags ###
 
-Si une de ces options: **-a**, **-s**, ou **-u <key-id>** est passé en argument
+Si une de ces options : **-a**, **-s**, ou **-u <key-id>** est passé en argument
 de la commande, alors nous créons un objet tag qui nécessite un message tag.
-À moins que l'option -m <msg> ou -F <file> soit fournie, un éditeur se lance
+À moins que l'option -m <msg> ou -F <file> ne soit fournie, un éditeur se lance
 pour que l'utilisateur saisisse le message du tag.
 
-Quand cela se produit, un nouvelle objet est ajouté à la base de donnée objet
+Quand cela se produit, un nouvel objet est ajouté à la base de donnée objet
 de Git et la référence tag pointe vers cet _objet tag_, plutôt que sur le
 commit lui-même. Ce concept est utile car vous pouvez maintenant signer le
 tag, et vérifier plus tard que le commit correspond. Vous pouvez créer un
-objet tag comme ceci:
+objet tag comme ceci :
 
     $ git tag -a stable-1 1b2e1d63ff
 
@@ -42,7 +42,7 @@ clé dans votre fichier de configuration _.git/config_ ou _~.gitconfig_.
     [user]
         signingkey = <gpg-key-id>
 
-Vous pouvez aussi le configurer comme ceci:
+Vous pouvez aussi le configurer comme ceci :
 
     $ git config (--global) user.signingkey <gpg-key-id>
 
@@ -52,6 +52,6 @@ par un **-s**.
     $ git tag -s stable-1 1b2e1d63ff
 
 Si vous n'avez pas configuré une clé GPG dans votre fichier de configuration,
-vous pouvez faire la même chose de cette façon:
+vous pouvez faire la même chose de cette façon :
     
     $ git tag -u <gpg-key-id> stable-1 1b2e1d63ff

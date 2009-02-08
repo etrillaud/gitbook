@@ -3,7 +3,7 @@
 La commande linkgit:git-log[1] vous montrera des listes de commits.
 Toute seule, elle vous montrera les commits visible depuis le commit
 parent de votre version courante; mais vous pouvez faire des
-requêtes plus spécifiques:
+requêtes plus spécifiques :
 
     $ git log v2.5..	    # commits depuis (non-visible depuis) v2.5
     $ git log test..master	# commits visibles depuis master mais pas test
@@ -19,7 +19,7 @@ requêtes plus spécifiques:
 
 Et vous pouvez bien sûr combiner toutes ces options; la requête
 suivante trouve tous les commits depuis v2.5 qui touchent le
-Makefile et tous les fichier sous fs/:
+Makefile et tous les fichier sous fs/ :
 
     $ git log v2.5.. Makefile fs/
 
@@ -39,7 +39,7 @@ d'abord, qui correspond aux arguments donnés à la commande de log.
 	    bash completion: 'git apply' should use 'fix' not 'strip'
 	    Bring completion up to date with the man page.
 
-Vous pouvez aussi demander à git de vous montrer les patches:
+Vous pouvez aussi demander à git de vous montrer les patches :
 
     $ git log -p
 
@@ -87,7 +87,7 @@ fichier.
 
 Vous pouvez formater la sortie du log pour afficher ce que vous voulez.
 L'option '--pretty' peut servir pour afficher les log avec un format
-pré-réglé, comme 'oneline':
+pré-réglé, comme 'oneline' :
 
 	$ git log --pretty=oneline
 	a6b444f570558a5f31ab508dc2a24dc34773825f dammit, this is the second time this has reverted
@@ -97,7 +97,7 @@ pré-réglé, comme 'oneline':
 	0f87b4d9020fff756c18323106b3fd4e2f422135 merged recent changes: * accepts relative alt pat
 	f0ce7d5979dfb0f415799d086e14a8d2f9653300 updated the Manifest file
 
-Ou vous pouvez utiliser le format 'short':
+Ou vous pouvez utiliser le format 'short' :
 
 	$ git log --pretty=short
 	commit a6b444f570558a5f31ab508dc2a24dc34773825f
@@ -128,7 +128,7 @@ linkgit:git-log[1]) pour toutes les options de formatage.
 	0f87b4d was Scott Chacon, 12 days ago, message: merged recent changes:
 	
 Autre chose intéressante, vous pouvez aussi visualiser le graphe des commits
-avec l'options '--graph', comme ceci:
+avec l'options '--graph', comme ceci :
 
 	$ git log --pretty=format:'%h : %s' --graph
 	* 2d3acf9 : ignore errors from SIGCHLD on trap
@@ -155,7 +155,7 @@ l'ordre de l'affiche des commits est plutôt arbitraire.
 Si vous voulez spécifier un ordre en particulier, vous pouvez ajouter
 une option à la commande git log.
 
-Pa défaut les commit sont montrés dans l'ordre inversement
+Par défaut les commit sont montrés dans l'ordre inversement
 chronologique.
 
 Cependant, si vous ajoutez l'option '--topo-order', les commits
@@ -197,7 +197,7 @@ Vous pouvez aussi utiliser '--date-order', qui ordonne les commits par date.
 Cette option est similaire à '--topo-order' dans le sens où les parents seront affichés après
 tus leurs enfants, mais autrement les commits sont toujours ordonnés suivant la date. Vous
 pouvez voir ici que les lignes de développement sont groupées ensembles, et qu'elle
-s'éloignent quand un développement parallèle à lieu:
+s'éloignent quand un développement parallèle à lieu :
 
 	$ git log --pretty=format:'%h : %s' --date-order --graph
 	*   4a904d7 : Merge branch 'idx2'

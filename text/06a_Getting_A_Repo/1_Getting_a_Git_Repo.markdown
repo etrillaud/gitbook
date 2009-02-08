@@ -12,11 +12,11 @@ URL Git du projet - l'endroit où se trouve le dépôt. Git peut être utilisé
 avec de nombreux protocoles, donc cette adresse peut commencer avec ssh://,
 http(s)://, git://, ou juste un nom d'utilisateur (en supposant que git passe
 par ssh). Par exemple, le code source de Git même peut être cloné en passant
-par le protocole git:
+par le protocole git :
 
     git clone git://git.kernel.org/pub/scm/git/git.git
 
-ou par http:
+ou par http :
 
     git clone http://www.kernel.org/pub/scm/git/git.git
 
@@ -36,13 +36,13 @@ nouveau répertoire nommé 'linux-2.6' pour y cloner le code).
 
 Imaginons que nous avons une archive nommée project.tar.gz avec notre
 travail initial. Nous pouvons le placer sous le contrôle de version de Git
-comme ceci:
+comme ceci :
 
     $ tar xzf project.tar.gz
     $ cd project
     $ git init
 
-Git vous répondra:
+Git vous répondra :
 
     Initialized empty Git repository in .git/
 

@@ -1,13 +1,13 @@
 ## Comparer les Commits - Git Diff ##
 
 Vous pouvez générer les différences entres 2 version de votre projet
-en utilisant linkgit:git-diff[1]:
+en utilisant linkgit:git-diff[1] :
 
     $ git diff master..test
 
 Cette commande produit une différence entre le sommet de 2 banches.
 Si vous préférez trouver la différence de leur ancêtre commun,
-vous pouvez utiliser 3 points au lieu de 2:
+vous pouvez utiliser 3 points au lieu de 2 :
 
     $ git diff master...test
 
@@ -20,14 +20,14 @@ branche, etc.
 
 Vous utiliserez couramment linkgit:git-diff[1] pour trouver les différences
 entre votre dernier commit, votre index, et votre répertoire de travail
-courant. Un usage courant est de lancer:
+courant. Un usage courant est de lancer :
     
     $ git diff
 
 ce qui vous montrera les changements dans le répertoire de travail
 qui ne sont pas encore assemblés pour le prochain commit.
 Si vous voulez voir ce qui _est_ assemblé pour le prochain commit,
-vous pouvez lancer:
+vous pouvez lancer :
 
     $ git diff --cached
 
@@ -45,14 +45,14 @@ votre dernier commit; ces changements seront committés si vous lancez
 
 Si vous voulez voir comment votre répertoire de travail actuel diffère de
 l'état  du projet dans une autre branche, vous pouvez lancer quelque chose
-comme ça:
+comme ça :
 
     $ git diff test
 
 Cela vous montrera la différence entre votre répertoire de travail actuel
 et la capture de la branche 'test'. Vous pouvez aussi limiter la
 différence à un fichier spécifique ou à un sous-répertoire en ajoutant
-un *limiteur de chemin*:
+un *limiteur de chemin* :
 
     $ git diff HEAD -- ./lib 
 

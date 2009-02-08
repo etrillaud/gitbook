@@ -4,13 +4,13 @@ Un projet générera souvent des fichiers que vous ne voulez pas surveiller
 avec git. En général, ceux sont des fichiers qui ne servent que compilation
 de programme, ou des fichiers temporaires créés par votre éditeur de texte.
 Ne pas surveiller ces fichiers revient à ne pas les inclure avec "`git-add`".
-Mais il devient très vite ennuyant d'avoir tous ces fichiers non-suivis; ils
+Mais il devient très vite ennuyant d'avoir tous ces fichiers non-suivis ; ils
 rendent "`git add .`" et "`git commit -a`" pratiquement inutile, et ils
 se montrent dans chaque sortie de  "`git status`".
 
 Vous pouvais demander à git d'ignorer certains fichiers en créant un fichier
 nommé .gitignore dans la racine de votre répertoire de travail. Ce fichier
-contiendra ce type d'information:
+contiendra ce type d'information :
 
 	# Les ligne commençant par '#' sont des commentaires.
     # Ignorer tous les fichiers nommés foo.txt

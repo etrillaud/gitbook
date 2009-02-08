@@ -6,7 +6,7 @@
 Un objet "tag" contient un nom d'objet (simplement nommé 'object'), un type
 d'objet, un nom de tag, le nom de la personne ("taggeur") qui a créé le tag,
 et un message, qui peut contenir une signature, comme on peut le voir en
-utilisant linkgit:git-cat-file[1]:
+utilisant linkgit:git-cat-file[1] :
 
     $ git cat-file tag v1.5.0
     object 437b1b20df4b356c9342dac8d38849f24ef44f27

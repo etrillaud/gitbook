@@ -17,18 +17,18 @@ Maintenant travaillez un peu dessus, en créant 2 commits.
 
 Pendant ce temps, quelqu'un d'autre travaille en créant aussi 2 nouveaux
 commits sur la branche d'origine. Cela signifie que les 2 branches
-'origine' et 'mywork' ont avancées, et elle ont aussi divergées.
+'origine' et 'mywork' ont avancé, et elle ont aussi divergé.
 
 [fig:rebase1]
 
-À ce moment, vous pouvez utiliser "pull" pour merger vos modifications;
-le résultat créera un nouveau commit 'merge', comme ceci:
+À ce moment, vous pouvez utiliser "pull" pour merger vos modifications ;
+le résultat créera un nouveau commit 'merge', comme ceci :
 
 [fig:rebase2]
 
 Cependant, si vous préférez garder l'historique de 'mywork' sous
 l'aspect d'une simple série de commits sans 'merge', vous pouvez aussi
-utiliser linkgit:git-rebase[1]:
+utiliser linkgit:git-rebase[1] :
 
     $ git checkout mywork
     $ git rebase origin
@@ -43,19 +43,19 @@ version de 'mywork'.
 
 Une fois que la référence ('mywork') est mise à jour jusqu'au dernier objet
 commit créé, vos anciens commits seront abandonnés. Ils seront sûrement
-effacer si vous lancer la commande de ramasse-miettes. (voir linkgit:git-gc[1])
+effacés si vous lancez la commande de ramasse-miettes. (voir linkgit:git-gc[1])
 
 [fig:rebase4]
 
 Maintenant nous pouvons voir la différence de l'historique entre l'exécution
-d'un merge et l'exécution d'une recombinaison (rebase):
+d'un merge et l'exécution d'une recombinaison (rebase) :
 
 [fig:rebase5]
 
 Dans le processus d'une recombinaison, des conflits peuvent se produire.
-Dans ce cas, le processus s'arrêtera et vous permettra de réparer ces conflits;
+Dans ce cas, le processus s'arrêtera et vous permettra de réparer ces conflits ;
 après les avoir fixés, utilisez "git-add" pour mettre à jour l'index avec ce
-nouveau contenu, puis, au lieu de lancer git-commit, lancez juste:
+nouveau contenu, puis, au lieu de lancer git-commit, lancez juste :
 
     $ git rebase --continue
 
@@ -63,7 +63,7 @@ et git continuera d'appliquer le reste des patches.
 
 À n'importe quel moment, vous pouvez utiliser l'option `--abort` pour
 annuler le processus et retourner au même état de 'mywork' qu'au
-démarrage de la recombinaison:
+démarrage de la recombinaison :
 
     $ git rebase --abort
 

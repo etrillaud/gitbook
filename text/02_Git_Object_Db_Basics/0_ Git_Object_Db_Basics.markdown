@@ -4,7 +4,7 @@
 
 Toutes les informations nécessaires pour décrire l'historique d'un
 projet sont stockées dans des fichiers référencés par un "nom d'objet"
-de 40 caractères qui ressemble à quelque chose comme ça:
+de 40 caractères qui ressemble à quelque chose comme ça :
     
     6ff87c4664981e4397625791c8ea3bbb5f2279a3
 
@@ -13,7 +13,7 @@ Dans chaque situation, le nom est calculé en prenant le hash SHA1
 représentant le contenu de l'objet. Le hash SAH1 est une fonction de
 hash cryptographique. Ce que cela signifie pour nous, c'est qu'il est
 virtuellement impossible de trouver 2 objets différents avec le même nom.
-Cela à de nombreux avantages, parmi lesquels:
+Cela à de nombreux avantages, parmi lesquels :
 
 - Git peut rapidement savoir si 2 objets sont les mêmes ou non, juste
   en comparant les noms.
@@ -27,10 +27,10 @@ Cela à de nombreux avantages, parmi lesquels:
 
 Chaque objet se compose de 3 choses - un **type**, une **taille** et le
 **contenu**. La _taille_ est simplement la taille du contenu, le contenu
-dépend du type de l'objet, et il y a 4 types d'objets différents:
+dépend du type de l'objet, et il y a 4 types d'objets différents :
 "blob", "tree", "commit", et "tag".
 
-- Un **"blog"** est utilisé pour stocker les données d'un fichier - il
+- Un **"blob"** est utilisé pour stocker les données d'un fichier - il
   s'agit en général d'un fichier.
 - Un **"tree"** est comme un répertoire - il référence une liste d'autres
   "tree" et/ou d'autres "blobs" (i.e. fichiers et sous-répertoires).

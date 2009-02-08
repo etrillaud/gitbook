@@ -9,7 +9,7 @@ vos commits.
 
 Ces commandes vont créer un fichier dans votre répertoire utilisateur qui 
 sera utilisé par tout vos projets. Par défaut, ce fichier est
-*~/.gitconfig* et il contiendra quelque chose comme ça:
+*~/.gitconfig* et il contiendra quelque chose comme ça :
 
     [user]
             name = Scott Chacon
