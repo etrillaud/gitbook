@@ -158,7 +158,7 @@ fournit des changement dans son dépôt publique, ressemble à ça :
 L'utilisation des protocoles http et git permet aux autres développeurs
 de récupérer les derniers changements, mais ils n'auront pas l'autorisation
 d'écriture sur ces dépôt. Pour cela, vous devrez mettre à jour votre dépôt
-publique avec les derniers changements obtenus votre le dépôt privé.
+publique avec les derniers changements de votre le dépôt privé.
 
 La façon la plus simple de procéder est d'utiliser linkgit:git-push[1] et ssh ;
 pour mettre à jour la branche "master" avec le dernier état de votre branche
@@ -170,9 +170,9 @@ ou juste
 
     $ git push ssh://yourserver.com/~you/proj.git master
 
-Comme avec git-fetch, git-push se plaindra qu'il n'y a pas eu d'avance rapide
-(fast-forward) ; allez à la section suivante pour plus de détails pour gérer
-ce cas.
+Comme avec git-fetch, git-push se plaindra si l'opération ne se résume
+pas à une avance rapide (fast-forward) ; allez à la section suivante
+pour plus de détails pour gérer ce cas.
 
 La cible d'un "push" est normalement un dépôt 'nu'. Vous pouvez aussi publier
 vers un dépôt qui contient une arborescence de travail, mais cette arborescence
