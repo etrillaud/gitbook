@@ -142,10 +142,12 @@ task :html => :merge do
       File.open(File.join(html_dir, chapter_file), 'w') do |f|
         nav = ''
         if (cf = chapter_files[index - 1]) && index != 0
-          nav += "<a href=\"#{cf[1]}\">Prev</a> "
+          url = URI.escape(cf[1], Regexp.new("[^#{URI::PATTERN::UNRESERVED}]"))
+          nav += "<a href=\"#{url}\">Pr&eacute;c&eacute;dent</a> "
         end
         if cf = chapter_files[index + 1]
-          nav += " <a href=\"#{cf[1]}\">Next</a>"
+          url = URI.escape(cf[1], Regexp.new("[^#{URI::PATTERN::UNRESERVED}]"))
+          nav += " <a href=\"#{url}\">Suivant</a>"
         end
         html_template = File.new(chapter_layout).read
         html_template.gsub!("#title", chapter_title)
