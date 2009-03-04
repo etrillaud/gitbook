@@ -35,7 +35,7 @@ modifiés mais pas assemblés et ceux qui ne sont pas suivis.
     #	blametree-init
     #	git-gui/git-citool
 
-Si vous effacé complètement l’index, vous ne perdrez généralement aucune
+Si vous effacez complètement l’index, vous ne perdrez généralement aucune
 information tant que vous avez le nom du tree qui est décrit.
 
 Grâce à cela, vous devriez avoir un bonne compréhension des bases de ce que
