@@ -1,4 +1,4 @@
-## Configurer un Dépôt Publiaue ##
+## Configurer un Dépôt Publique ##
 
 En supposant que vous avez votre dépôt personnel dans le dossier ~/proj,
 nous allons créer un nouveau clone de ce dépôt et prévenir git-daemon qu'il
