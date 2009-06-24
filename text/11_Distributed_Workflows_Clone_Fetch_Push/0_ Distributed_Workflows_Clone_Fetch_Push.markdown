@@ -136,13 +136,13 @@ et visibles.
 
 Vous continuerez à travailler au jour-le-jour sur votre dépôt personnel,
 mais périodiquement vous enverrez (push) les modifications de votre
-dépôt personnel sur votre dépôt publique, permettant alors aux autres
+dépôt personnel sur votre dépôt public, permettant alors aux autres
 développeurs de récupérer (pull) les changements disponible dans ce dépôt.
 Donc le flux de travail, dans une situation où un autre développeur 
 fournit des changement dans son dépôt publique, ressemble à ça :
 
                                vous envoyez (push)
-      votre dépôt personnel ---------------------------> votre dépôt publique
+      votre dépôt personnel ---------------------------> votre dépôt public
                 ^                                               |
                 |                                               |
                 | vous récupérez (pull)                         | ils récupèrent (pull)
