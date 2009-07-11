@@ -2,9 +2,8 @@
 
 Bienvenue sur Git – le contrôle de version rapide et distribué.
 
-Ce livre sert de point de départ pour les gens qui veulent se
-familiariser à Git et l’apprendre aussi vite et rapidement que
-possible.
+Ce livre sert de point de départ pour les gens qui veulent se familiariser 
+avec Git, et l'apprendre aussi vite que possible.
 
 Ce livre commencera par vous expliquer comment Git stocke les données,
 afin de vous montrer pourquoi cet outil est si différent des autres

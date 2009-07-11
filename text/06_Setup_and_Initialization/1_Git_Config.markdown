@@ -1,7 +1,7 @@
 ### Configuration de git ###
 
 La première chose que vous voudrez et devrez faire, c’est de configurer
-votre nom et votre adresse mail que git utilisera quand vous signerez
+le nom et l'adresse mail que Git utilisera quand vous signerez
 vos commits.
 
     $ git config --global user.name "Scott Chacon"
