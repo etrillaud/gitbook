@@ -22,7 +22,7 @@ Puis vous lancez :
 
 	$ git pull experimental
 
-Cela récupérera automatiquement les données de `origin` et mergera
+Cela récupérera automatiquement les données de `origin` et fusionnera
 `origin/experimental` dans votre branche local `experimental`.
 
 De la même manière, vous pouvez publier vers `origin`, Git publiera vos

@@ -1,6 +1,6 @@
 ## Workflows distribués ##
 
-Supposons qu’Alice a démarré un nouveau projet dans son dépôt git
+Supposons qu’Alice aie démarré un nouveau projet dans son dépôt git
 situé dans `/home/alice/project` et que Bob, qui a un répertoire
 utilisateur sur la même machine (`/home/bob/`), veuille y
 contribuer.
@@ -11,7 +11,7 @@ Bob commence par :
 
 Cela crée un répertoire `mondepot` qui contient un clone du dépôt
 d’Alice. Le clone est une copie parfaite du projet original,
-possédant aussi sa propre copie de l’historique du projet original.
+contenant aussi sa propre copie de l’historique du projet original.
 
 Bob fait quelques changements et les commit :
 
@@ -25,9 +25,9 @@ depuis son dépôt situé dans `/home/bob/mondepot`. Alice fait alors :
     $ cd /home/alice/project
     $ git pull /home/bob/myrepo master
 
-Cela merge les changement de la branche `master` de Bob dans la branche
+Cela merge les changements de la branche `master` de Bob dans la branche
 courante d’Alice. Si Alice a fait ses propres changements pendant ce temps,
-alors elle devra peut être réparer quelques conflit à la main (l’option
+alors elle devra peut être résoudre des conflits à la main (l’option
 `master` dans la commande ci-dessus n’est pas nécessaire car c’est
 l’option par défaut).
 
@@ -41,8 +41,8 @@ simples :
 
     $ git remote add bob /home/bob/mondepot
 
-Avec ça, Alice peut effectuer la première opération seulement en
-utilisant la commande `git fetch`, elle ne mergera pas les modifications
+Avec ça, Alice peut effectuer la première opération en
+utilisant seulement la commande `git fetch`, elle ne mergera pas les modifications
 avec sa propre branche :
 
     $ git fetch bob
@@ -63,7 +63,7 @@ Après avoir examiné ces changements, Alice peut les merger dans sa branche
     $ git merge bob/master
 
 Ce `merge` peut aussi être fait en récupérant les données depuis
-sa propre branche de suivi distant, comme ceci :
+sa propre branche de suivi distante, comme ceci :
 
     $ git pull . remotes/bob/master
 
@@ -86,7 +86,7 @@ du dépôt et cette adresse est utilisée pour récupérer les données avec `pu
 `git config -l` et la page de documentation de linkgit:git-config[1]
 explique chacune de ces options)
 
-Git conserve aussi une copie propre de la branche `master` d’Alice,
+Git conserve aussi sa propre copie de la branche `master` d’Alice
 sous le nom `origin/master` :
 
     $ git branch -r
@@ -105,7 +105,7 @@ Git peut aussi être utilisé de manière plus similaire à CVS, avec un dépôt
 central sur lequel de nombreux utilisateurs envoient leur modifications.
 Voir linkgit:git-push[1] et linkgit:gitcvs-migration[1].
 
-### Les dépôt git publiques ###
+### Les dépôt git publics ###
 
 Une autre façon d’envoyer des modifications à un projet est d’avertir
 le chef de ce projet afin qu’il récupère les changements depuis votre
@@ -128,10 +128,10 @@ ou une adresse ssh :
 Pour les projets avec quelques développeurs ou pour synchroniser quelques
 projets privés, cela peut vous suffire.
 
-Cependant, la pratique la plus courante est de maintenir un dépôt publique
+Cependant, la pratique la plus courante est de maintenir un dépôt public
 (généralement sur le même host) pour que les autres puissent y récupérer les
 changements. Cela est souvent plus efficace et vous permet de séparer
-proprement le travail privé en cours de réalisation des projets publiques
+proprement le travail privé en cours de réalisation des projets publics
 et visibles.
 
 Vous continuerez à travailler au jour-le-jour sur votre dépôt personnel,
@@ -139,7 +139,7 @@ mais périodiquement vous enverrez (push) les modifications de votre
 dépôt personnel sur votre dépôt public, permettant alors aux autres
 développeurs de récupérer (pull) les changements disponible dans ce dépôt.
 Donc le flux de travail, dans une situation où un autre développeur 
-fournit des changement dans son dépôt publique, ressemble à ça :
+fournit des changement dans son dépôt public, ressemble à ça :
 
                                vous envoyez (push)
       votre dépôt personnel ---------------------------> votre dépôt public
@@ -149,16 +149,16 @@ fournit des changement dans son dépôt publique, ressemble à ça :
                 |                                               |
                 |                                               |
                 |               ils envoient (push)             V
-      leurs dépôts publiques <---------------------------  leurs dépôts
+      leurs dépôts publics <---------------------------  leurs dépôts
       
 
 
-### Publier des modifications sur un dépôt publique ###
+### Publier des modifications sur un dépôt public ###
 
 L’utilisation des protocoles http et git permet aux autres développeurs
 de récupérer les derniers changements mais ils n’auront pas l’autorisation
 d’écrire sur ce dépôt. Pour cela, vous devrez mettre à jour votre dépôt
-publique avec les derniers changements obtenus depuis votre dépôt privé.
+public avec les derniers changements obtenus depuis votre dépôt privé.
 
 La façon la plus simple de procéder est d’utiliser linkgit:git-push[1] et ssh.
 Pour mettre à jour la branche `master` avec le dernier état de votre branche
@@ -178,7 +178,7 @@ La cible d’un `push` est normalement un dépôt « nu ». Vous pouvez aussi 
 vers un dépôt qui contient une arborescence de travail mais cette arborescence
 ne sera pas mise à jour durant la publication. Cela pourra vous amener à des
 résultats inattendus, par exemple si la branche que vous publiez est l’actuelle
-branche de travail sur le dépôt publique.
+branche de travail sur le dépôt public.
 
 Comme avec `git-fetch`, vous pouvez aussi rajouter des options de configuration
 pour vous permettre d’aller plus rapidement, par exemple, après :
@@ -216,8 +216,8 @@ en rajoutant le préfixe « + » au nom de la branche :
 
     $ git push ssh://yourserver.com/~you/proj.git +master
 
-Normalement, quand le sommet de la branche d’un dépôt publique est modifié,
-il est modifié pour pointer vers un descendant du commit ver lequel il
+Normalement, quand le sommet de la branche d’un dépôt public est modifié,
+il est modifié pour pointer vers un descendant du commit vers lequel il
 pointait avant. En forçant la publication dans cette situation, vous
 cassez cette convention.
 

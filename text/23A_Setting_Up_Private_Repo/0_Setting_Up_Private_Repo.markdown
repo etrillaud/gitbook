@@ -6,7 +6,7 @@ solutions.
 
 ### Accéder au dépôt par SSH ###
 
-En général, la solution la plus facile est d’utiliser simplement Git à travers ssh.
+En général, la solution la plus simple est d’utiliser simplement Git à travers ssh.
 Si les utilisateurs ont déjà des comptes ssh sur le serveur, vous pouvez
 placer le dépôt git n’importe où dans le système auquel ils ont accès
 et les laisser accéder à ce dépôt grâce à une simple connexion ssh.

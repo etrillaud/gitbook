@@ -21,7 +21,7 @@ de la commande, alors nous créons un objet tag qui nécessite un message tag.
 À moins que l’option `-m <msg>` ou `-F <file>` soit fournie, un éditeur se lance
 pour que l’utilisateur saisisse le message du tag.
 
-Quand cela se produit, un nouvelle objet est ajouté à la base de donnée objet
+Quand cela se produit, un nouvel objet est ajouté à la base de donnée objet
 de Git et la référence tag pointe vers cet _objet tag_, plutôt que sur le
 commit lui-même. Ce concept est utile car vous pouvez maintenant signer le
 tag et vérifier plus tard que le commit correspond. Vous pouvez créer un

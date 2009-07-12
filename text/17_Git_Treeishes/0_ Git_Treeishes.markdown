@@ -41,14 +41,14 @@ Ce qui signifie que les commandes suivantes vous donneront le même résultat :
 	
 ### Spécification de date ###
 
-Le log de références que git conserve vous permettre de faire certaines choses
+Le journal des références que git conserve vous permet de faire certaines choses
 localement, comme :
 
 	master@{yesterday}
 
 	master@{1 month ago}
 
-Qui est un raccourci pour « là où se trouver le sommet de la branche master 
+Qui est un raccourci pour « là où se trouvai le sommet de la branche master 
 hier », etc. Ce format peut
 montrer des sha différents sur des ordinateurs différents, même si la branche
 master est actuellement au même niveau.
@@ -65,7 +65,7 @@ vous donnera la cinquième valeur avant la référence du sommet de master.
 ### La carotte parent ###
 
 Cela vous donnera le Nième parent d’un commit particulier. Ce format n’est
-utile que pour les commits de merge — les objets commits qui ont plus
+utile que pour les commits de fusion — les objets commits qui ont plus
 d’un parent.
 
 	master^2

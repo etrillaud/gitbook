@@ -56,7 +56,7 @@ l’état des fichiers a changé.
 
 Maintenant nous voyons que les quatres premiers fichiers sont assemblés et que le
 dernier ne l’est pas encore. Ces informations sont simplement une compression
-de l’affichage obtenu avec la command `git status` :
+de l’affichage obtenu avec la commande `git status` :
 
 	$ git status
 	# On branch master
@@ -80,7 +80,7 @@ retirer des fichiers de l’index (`3: revert`), ajouter des fichier non-suivis
 sont assez faciles à comprendre. Cependant, il y a une commande plutôt
 cool qui demande des explications : l’assemblage de patches (`5: patch`).
 
-Si vous tapez `5` ou `p` dans le menu, git vous montrera vos différences
+Si vous tapez `5` ou `p` dans le menu, git vous montrera les différences
 patch par patch (ou morceau par morceau) et vous demandera si vous voulez
 assembler chacun d’eux. De cette façon, vous pouvez n’assembler qu’une
 partie d’un fichier modifié. Si vous avez édité un fichier et ne voulez

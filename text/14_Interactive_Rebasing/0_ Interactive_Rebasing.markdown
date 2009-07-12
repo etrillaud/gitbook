@@ -2,8 +2,8 @@
 
 Vous pouvez aussi recombiner (rebase) les commits interactivement.
 Ceci s’utilise souvent pour ré-écrire vos objets commits avant de les publier.
-C’est une manière simple de découper, regrouper et ré-ordonner les commits
-avant de les partager avec les autres. Vous pouvez aussi utiliser ça pour
+C’est une manière simple de découper, regrouper et réordonner les commits
+avant de les partager avec d'autres. Vous pouvez aussi utiliser ça pour
 nettoyer les commits que vous récupérerez chez quelqu’un avant de les appliquer
 localement.
 
@@ -14,8 +14,8 @@ vous pouvez activer le mode interactif en utilisant l’option `-i` ou
 	$ git rebase -i origin/master
 
 Cela lancera le mode interactif de recombinaison avec tous les commits
-que vous avez créé depuis votre dernière publication (ou le dernier
-merge depuis le dépôt d’origine).
+que vous avez créé depuis votre dernière publication (ou la dernière
+fusion depuis le dépôt d’origine).
 
 Pour voir quels commits seront concernés, vous pouvez utiliser la
 commande `log` de cette façon :
@@ -49,7 +49,7 @@ chaque commit est décrit par un ligne avec le format suivant :
 	
 Maintenant, vous pouvez changer l’action (qui est `pick` par défaut) soit
 par `edit` ou `squash` ou juste la laisser comme elle est.
-Vous pouvez aussi ré-ordonner les commits en déplaçant les lignes comme
+Vous pouvez aussi réordonner les commits en déplaçant les lignes comme
 vous le voulez. Ensuite, quand vous sortez de l’éditeur, git essayera
 d’appliquer les commits en suivant leur ordre d’arrangement et l’action
 sélectionnée.
@@ -58,7 +58,7 @@ Si `pick` est sélectionné, il essayera simplement d’appliquer le patch et
 de sauvegarder le commit avec le même message qu’avant.
 
 Si `squash` est sélectionné, il combinera ce commit avec le précédent pour
-former un nouveau commit. Vous trouverez alors un autre éditeur pour merger
+former un nouveau commit. Vous trouverez alors un autre éditeur pour fusionner
 les messages des deux commit qui ont étés assemblés ensemble. Donc, si vous
 sortez du premier éditeur de la manière suivante :
 
@@ -95,8 +95,8 @@ vous devrez créer un nouveau message de commit à partir de ça :
 Une fois que vous aurez édité cette partie en un seul message et quitté
 l’éditeur, le commit sera sauvegardé avec votre nouveau message.
 
-Si vous avec sélectionné `edit`, la même chose se passera, mais un pause
-sera marqué entre chaque commit pour vous donner la main avec une ligne de
+Si vous avec sélectionné `edit`, la même chose se passera, mais une pause
+sera marquée entre chaque commit pour vous donner la main avec une ligne de
 commande afin que vous puissiez modifier le commit ou son contenu.
 
 Par exemple, si vous voulez découper un commit, vous sélectionnerez `edit`

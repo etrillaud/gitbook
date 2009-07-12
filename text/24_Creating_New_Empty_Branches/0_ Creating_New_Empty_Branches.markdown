@@ -2,7 +2,7 @@
 
 Parfois, vous voudrez peut-être garder certaines branches dans votre dépôt
 qui ne partagent pas d'ancêtre en commun avec votre code normal. Des exemples
-de ce genre d'utilisation peut être de la documentation automatiquement
+de ce genre d'utilisation peuvent être de la documentation automatiquement
 générée ou des choses dans ce style. Si vous voulez créer une nouvelle
 branche qui n'utilise pas la base du code actuelle comme parent,
 vous pouvez créer une branche vide comme ceci:

@@ -34,7 +34,7 @@ différence.
 
 ### Réparer une erreur committée ###
 
-Si vous avez déjà committé ce que vous n’auriez pas du, il y a deux façons
+Si vous avez déjà committé ce que vous n’auriez pas dû, il y a deux façons
 fondamentalement différentes de régler le problème :
 
 1. Vous pouvez créer un nouveau commit qui annule les changements
@@ -42,10 +42,10 @@ fondamentalement différentes de régler le problème :
 	votre erreur est déjà publique.
 
 2. Vous pouvez revenir en arrière et modifier l’ancien commit. Vous ne
-	devriez jamais faire ça si vous avez déjà rendu l’historique publique.
+	devriez jamais faire ça si vous avez déjà rendu l’historique public.
 	Git n’est pas conçu pour que l’historique d’un projet change et ne
-	peut pas effectuer correctement des merges répétés sur depuis une branche
-	qui a vu son historique changer.
+	peut pas effectuer correctement des fusions répétés sur depuis une branche
+	qui a vu son historique modifié.
 
 #### Réparer une erreur sur un nouveau commit ####
 
@@ -55,7 +55,7 @@ du mauvais commit, par exemple, pour revenir au commit le plus récent :
 
     $ git revert HEAD
 
-Cela créera un nouveau commit qui annule les changements dans HEAD.
+Cela créera un nouveau commit qui annulera les changements dans HEAD.
 Vous pourrez éditer le message de ce nouveau commit.
 
 Vous pouvez aussi revenir sur des changements plus anciens, par
@@ -66,7 +66,7 @@ exemple, sur l’avant-dernier changement :
 Dans ce cas, git essayera d’annuler l’ancien changement en gardant
 intactes les modifications faites depuis. Si plus d’un changement
 se superpose sur les changements à annuler, vous aurez à régler les
-conflits manuellement, de la même façon que quand vous réglez un merge.
+conflits manuellement, de la même façon que quand vous réglez une fusion.
 
 #### Réparer une erreur en modifiant le commit ####
 

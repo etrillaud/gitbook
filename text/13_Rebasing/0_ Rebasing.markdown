@@ -17,11 +17,11 @@ Maintenant travaillez un peu dessus, en créant 2 commits :
 
 Pendant ce temps, quelqu’un d’autre travaille en créant aussi deux nouveaux
 commits sur la branche d’origine. Cela signifie que les deux branches
-`origine` et `mywork` ont avancées et elle ont aussi divergées.
+`origine` et `mywork` ont avancées et elles ont aussi divergées.
 
 [fig:rebase1]
 
-À ce moment, vous pouvez utiliser `pull` pour merger vos modifications,
+À ce moment, vous pouvez utiliser `pull` pour fusionner vos modifications,
 le résultat créera un nouveau commit `merge`, comme ceci :
 
 [fig:rebase2]
@@ -43,12 +43,12 @@ version de `mywork`.
 
 Une fois que la référence (`mywork`) est mise à jour jusqu'au dernier objet
 commit créé, vos anciens commits seront abandonnés. Ils seront sûrement
-effacer si vous lancer la commande de ramasse-miettes (voir linkgit:git-gc[1]).
+effacé si vous lancez la commande de ramasse-miettes (voir linkgit:git-gc[1]).
 
 [fig:rebase4]
 
 Maintenant nous pouvons voir la différence de l’historique entre l’exécution
-d’un merge et l’exécution d'une recombinaison (rebase) :
+d’une fusion et l’exécution d'une recombinaison (rebase) :
 
 [fig:rebase5]
 
