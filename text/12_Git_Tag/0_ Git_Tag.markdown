@@ -12,7 +12,7 @@ Après ça, nous pouvons utilisé `stable-1` pour faire référence au commit 1b
 
 Ceci est un « tag léger », car aucune branche n'a été créée durant le processus.
 Si vous voulez aussi rajouter un commentaire à ce tag et le signer
-avec un méthode cryptographique alors nous allons plutôt créé un *objet tag*.
+avec un méthode cryptographique alors nous allons plutôt créer un *objet tag*.
 
 ### Les objets tags ###
 
