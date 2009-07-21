@@ -43,7 +43,7 @@ version de `mywork`.
 
 Une fois que la référence (`mywork`) est mise à jour jusqu'au dernier objet
 commit créé, vos anciens commits seront abandonnés. Ils seront sûrement
-effacé si vous lancez la commande de ramasse-miettes (voir linkgit:git-gc[1]).
+effacés si vous lancez la commande de ramasse-miettes (voir linkgit:git-gc[1]).
 
 [fig:rebase4]
 
